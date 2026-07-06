@@ -7,18 +7,11 @@
     </head>
     <body>
         <h1>Godot Video Converter</h1>
-        <form
-            id="video-form"
-            method="post"
-            enctype="multipart/form-data"
-            action="http://127.0.0.1:8000/upload"
-        >
-            <div class="input-wrapper">
-                <input id="input-files" type="file" accept="video/*" multiple />
-                <button id="convert-button">Convert Videos</button>
-                <button id="upload-button">Upload Videos</button>
-            </div>
-        </form>
+        <div class="input-wrapper">
+            <input id="input-files" type="file" accept="video/*" multiple />
+            <button id="convert-button">Convert Videos</button>
+            <button id="upload-button">Upload Videos</button>
+        </div>
         <div class="output-wrapper">
             <p>Video Title</p>
             <button>Download Button</button>

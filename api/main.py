@@ -29,9 +29,9 @@ video_formats = ["video/mp4", "video/mkv", "video/mov", "video/gif, video/avi"]
 options = {"video_quality": 5, "audio_quality": 5}
 
 
-@app.get("/")
+@app.get("/health")
 def read_root():
-    return {"Message": "Thing works"}
+    return {"Status": "Thing works"}
 
 
 @app.post("/upload")

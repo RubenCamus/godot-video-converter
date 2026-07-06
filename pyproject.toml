@@ -1,0 +1,16 @@
+[project]
+name = "godot-video-converter"
+version = "0.1.0"
+description = "Video converter suited for Godot accepted video formats (Ogg Theora)."
+authors = [
+    {name = "RubenCamus",email = "Ruben-4-millet@hotmail.com"}
+]
+license = "MIT"
+requires-python = ">=3.14"
+dependencies = [
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

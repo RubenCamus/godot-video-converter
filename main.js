@@ -3,7 +3,6 @@ const { spawn } = require("node:child_process");
 
 const path = require("node:path");
 let backendProcess;
-async function uploadVideo(video) {}
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -27,13 +26,16 @@ app.whenReady().then(() => {
     }
   });
 });
-
+app.on("before-quit", () => {
+  if (backendProcess) {
+    backendProcess.kill();
+  }
+});
 app.on("window-all-closed", () => {
   if (process.platform != "darwin") {
     app.quit();
   }
 });
-
 async function initBackend() {
   const apiDir = path.join(__dirname, "api");
   const pythonExe = path.join(apiDir, ".venv", "Scripts", "python.exe");
