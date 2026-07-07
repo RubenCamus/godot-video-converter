@@ -3,10 +3,23 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="styles.css" />
         <title>Godot Video Converter</title>
     </head>
     <body>
         <h1>Godot Video Converter</h1>
+        <div class="upload-wrapper">
+            <div class="upload-text-wrapper">
+                <img src="upload-icon.svg" alt="upload icon" />
+                <span>Drag files here</span>
+                <span>or select files from your computer</span>
+                <button>Upload Files</button>
+                <span>MP4, AVI, MOV, MKV</span>
+            </div>
+        </div>
+        <div class="my-videos-wrapper">
+            <button></button>
+        </div>
         <div class="input-wrapper">
             <input id="input-files" type="file" accept="video/*" multiple />
             <button id="convert-button">Convert Videos</button>
