@@ -4,21 +4,19 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basecoat-css@1.0.2/dist/basecoat.cdn.min.css"
         <title>Godot Video Converter</title>
     </head>
     <body>
-        <h1>Godot Video Converter</h1>
-        <div class="upload-wrapper">
-            <div class="upload-text-wrapper">
+        <h1 class="">Godot Video Converter</h1>
+        <div class="w-screen p-2 flex text-7xl">
+            <div class="upload-text-wrapper justify-center flex items-center">
                 <img src="upload-icon.svg" alt="upload icon" />
-                <span>Drag files here</span>
+                <span class="text-8xl text-amber-400">Drag files here</span>
                 <span>or select files from your computer</span>
                 <button>Upload Files</button>
                 <span>MP4, AVI, MOV, MKV</span>
             </div>
-        </div>
-        <div class="my-videos-wrapper">
-            <button></button>
         </div>
         <div class="input-wrapper">
             <input id="input-files" type="file" accept="video/*" multiple />
@@ -31,4 +29,5 @@
         </div>
     </body>
     <script src="./renderer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/basecoat-css@1.0.2/dist/js/all.min.js" defer></script>
 </html>
