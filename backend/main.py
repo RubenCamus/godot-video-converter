@@ -13,6 +13,16 @@ class UploadResponse(BaseModel):
     success: bool
     message: str
     data: UploadData | None = None
+
+class DownloadData(BaseModel):
+    filename: str | None
+    size: int | None
+
+class DownloadResponse(BaseModel):
+    success: bool
+    message: str
+    data: DownloadData | None
+
 def is_video_valid(file):
     if file.size == 0:
         raise HTTPException(400, "Empty file")
@@ -42,7 +52,7 @@ options = {"video_quality": 5, "audio_quality": 5}
 
 @app.get("/health")
 def read_root():
-    return {"Status": "Thing works"}
+    return {"status": "healthy"}
 
 
 @app.post("/upload", status_code=201, response_model=UploadResponse)
@@ -59,7 +69,14 @@ async def upload_controller(file: UploadFile):
     )
 @app.get("/download")
 async def download_video():
-    return
+    return DownloadResponse(
+        success = True,
+        message = "Video downloaded succesfully",
+        data = DownloadData(
+            filename = "FileName",
+            size = 0
+        )
+    )
 @app.post("/convert")
 async def convert_video(file: UploadFile):
     is_video_valid(file)
@@ -68,6 +85,8 @@ async def convert_video(file: UploadFile):
     video_bytes = await file.read()  # Read received file bytes
     # Write bytes into previously created file in input folder
     file_path.write_bytes(video_bytes)
+    if not Path('output').exists():
+            Path('output').mkdir()
     output_path = Path(f"output/{file_name.stem}.ogv")
     convertFile(file_path, options, output_path)
     # Check if output file exists
