@@ -1,7 +1,7 @@
 # Server videos
-/api/input
-/api/output
-
+/backend/input
+/backend/output
+/backend/__pycache__
 # Logs
 logs
 *.log

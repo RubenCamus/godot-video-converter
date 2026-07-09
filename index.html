@@ -1,33 +1,31 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="styles.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basecoat-css@1.0.2/dist/basecoat.cdn.min.css"
-        <title>Godot Video Converter</title>
-    </head>
-    <body>
-        <h1 class="">Godot Video Converter</h1>
-        <div class="w-screen p-2 flex text-7xl">
-            <div class="upload-text-wrapper justify-center flex items-center">
-                <img src="upload-icon.svg" alt="upload icon" />
-                <span class="text-8xl text-amber-400">Drag files here</span>
-                <span>or select files from your computer</span>
-                <button>Upload Files</button>
-                <span>MP4, AVI, MOV, MKV</span>
-            </div>
-        </div>
-        <div class="input-wrapper">
-            <input id="input-files" type="file" accept="video/*" multiple />
-            <button id="convert-button">Convert Videos</button>
-            <button id="upload-button">Upload Videos</button>
-        </div>
-        <div class="output-wrapper">
-            <p>Video Title</p>
-            <button>Download Button</button>
-        </div>
-    </body>
-    <script src="./renderer.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/basecoat-css@1.0.2/dist/js/all.min.js" defer></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Godot Video Converter</title>
+  </head>
+  <body>
+    <h1 class="">Godot Video Converter</h1>
+    <div class="w-screen p-2 flex text-7xl">
+      <div class="upload-text-wrapper justify-center flex items-center">
+        <img src="upload-icon.svg" alt="upload icon" />
+        <span class="text-8xl text-amber-400">Drag files here</span>
+        <span>or select files from your computer</span>
+        <button>Upload Files</button>
+        <span>MP4, AVI, MOV, MKV</span>
+      </div>
+    </div>
+    <div class="input-wrapper">
+      <input id="input-files" type="file" accept="video/*" multiple />
+      <button id="convert-button">Convert Videos</button>
+      <button id="upload-button">Upload Videos</button>
+    </div>
+    <div class="output-wrapper">
+      <p>Video Title</p>
+      <button>Download Button</button>
+    </div>
+  </body>
+  <script src="./renderer.js"></script>
 </html>

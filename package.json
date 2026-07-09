@@ -2,6 +2,7 @@
   "name": "godot-toolkit",
   "productName": "godot-toolkit",
   "version": "1.0.0",
+  "packageManager": "npm@11.10.1",
   "description": "Video converter app created for converting video files with ffmpeg to OGV Theora. The goal of this app is to make Godot devs´ workflow easier.",
   "main": ".vite/build/main.js",
   "private": true,

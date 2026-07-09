@@ -40,7 +40,6 @@ app.whenReady().then(() => {
   initBackend();
   createWindow();
 });
-
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
@@ -65,14 +64,18 @@ app.on("activate", () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
 async function initBackend() {
-  const apiDir = path.join(__dirname, "api");
-  const pythonExe = path.join(apiDir, ".venv", "Scripts", "python.exe");
-
+  const backendDirectory = path.join(__dirname, "../../backend");
+  const pythonExe = path.join(
+    backendDirectory,
+    ".venv",
+    "Scripts",
+    "python.exe",
+  );
   backendProcess = spawn(
     pythonExe,
     ["-m", "uvicorn", "main:app", "--port", "8000"],
     {
-      cwd: apiDir,
+      cwd: backendDirectory,
     },
   );
 }

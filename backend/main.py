@@ -1,9 +1,18 @@
+from http import HTTPStatus
 from pathlib import Path
-
+from pydantic import BaseModel
+from typing import Any, Optional
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from godot_video_converter import convertFile
 
+class UploadData(BaseModel):
+    filename: str | None
+    size: int | None
 
+class UploadResponse(BaseModel):
+    success: bool
+    message: str
+    data: UploadData | None = None
 def is_video_valid(file):
     if file.size == 0:
         raise HTTPException(400, "Empty file")
@@ -15,6 +24,8 @@ def is_video_valid(file):
 
 async def upload_video(file):
     file_name = Path(f"{file.filename}")
+    if not Path('input').exists():
+        Path('input').mkdir()
     file_path = Path(f"./input/{file_name}")
     video_bytes = await file.read()  # Read received file bytes
     file_path.write_bytes(video_bytes)
@@ -34,12 +45,21 @@ def read_root():
     return {"Status": "Thing works"}
 
 
-@app.post("/upload")
+@app.post("/upload", status_code=201, response_model=UploadResponse)
 async def upload_controller(file: UploadFile):
     is_video_valid(file)
     await upload_video(file)
-
-
+    return UploadResponse(
+        success= True,
+        message= "Video uploaded succesfully",
+        data= UploadData(
+            filename= file.filename,
+            size= file.size,
+        )
+    )
+@app.get("/download")
+async def download_video():
+    return
 @app.post("/convert")
 async def convert_video(file: UploadFile):
     is_video_valid(file)
@@ -54,4 +74,4 @@ async def convert_video(file: UploadFile):
     output_file = output_path.read_bytes()
     if output_file == 0:
         raise HTTPException(500, "Converted file is empty")
-    return {"Message": "Succesfully converted the video"}
+    return {"message": "Succesfully converted the video"}
