@@ -1,0 +1,13 @@
+.mainButton {
+    margin: 1em;
+    border-radius: 5px;
+    background-color: rgb(50, 50, 50);
+    color: white;
+    width: 75%;
+    font-size: 1em;
+    box-shadow: 1px 1px  ;
+    transition: background-color 200ms;
+}
+.mainButton:hover {
+    background-color: black;
+}
