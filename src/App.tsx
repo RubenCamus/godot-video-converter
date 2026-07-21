@@ -2,6 +2,8 @@ import { createRoot } from 'react-dom/client';
 import VideoComponent from './components/Video/Video';
 import { VideoData } from './types/video';
 import DropArea from './components/DropArea/DropArea';
+import MainButton from './components/MainButton/MainButton';
+import SecondaryButton from './components/SecondaryButton/SecondaryButton';
 // Change with API fetch
 const video: VideoData = {
   filename: "placeholder.mp4",
@@ -9,12 +11,23 @@ const video: VideoData = {
   size: 15010,
   length: 30
 }
+async function convertVideo() {
+  // FETCH backend for videos
+  // start ffmpeg conversion per video
+  // Show loading screen while waiting
+  // OnFinish
+  return
+}
 const App = () => {
   return (
     <>
       <DropArea></DropArea>
       <h2>Your videos</h2>
       <VideoComponent video={video} />
+      <div>
+        <SecondaryButton content='Choose Format'></SecondaryButton>
+        <MainButton content='Convert'></MainButton>
+      </div>
     </>
   )
 }
