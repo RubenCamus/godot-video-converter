@@ -86,7 +86,7 @@ async def get_videos():
     input_folder = Path('./input')
     for x in input_folder.iterdir():
         if x.is_file():
-            videoList.append(x)
+            videoList.append(x.name)
     return {
         "videos": videoList
     }
@@ -100,9 +100,9 @@ async def download_video(filename: str):
         filename=filename,
         media_type="video/ogg"
     )
-@app.post("/convert_file")
-async def convert_file(request: ConvertRequest):
-    file_path_obj = Path(request.filename)
+@app.post("/convert_file/{filename}")
+async def convert_file(filename: str):
+    file_path_obj = Path(filename)
     file_path = Path(f"./input/{file_path_obj}")
     if not Path('output').exists():
         Path('output').mkdir()

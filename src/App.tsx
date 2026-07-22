@@ -4,7 +4,7 @@ import { VideoData } from './types/video';
 import DropArea from './components/DropArea/DropArea';
 import MainButton from './components/MainButton/MainButton';
 import SecondaryButton from './components/SecondaryButton/SecondaryButton';
-import {convertVideo,getVideos} from "./services/FrontService";
+import {convertVideo, downloadVideo} from "./services/FrontService";
 // Change with API fetch
 const video: VideoData = {
   filename: "placeholder.mp4",
@@ -20,8 +20,8 @@ const App = () => {
       <VideoComponent video={video} />
       <div>
         <SecondaryButton content='Choose Format'></SecondaryButton>
-        <MainButton content='Convert'></MainButton>
-        <MainButton onClick={getVideos} content='Get Videos'></MainButton>
+        <MainButton onClick={convertVideo} content='Convert'></MainButton>
+        <MainButton onClick={downloadVideo} content="Download"></MainButton>
       </div>
     </>
   )
