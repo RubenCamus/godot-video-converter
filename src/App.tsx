@@ -11,13 +11,6 @@ const video: VideoData = {
   size: 15010,
   length: 30
 }
-async function convertVideo() {
-  // FETCH backend for videos
-  // start ffmpeg conversion per video
-  // Show loading screen while waiting
-  // OnFinish
-  return
-}
 const App = () => {
   return (
     <>
