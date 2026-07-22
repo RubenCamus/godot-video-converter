@@ -1,8 +1,8 @@
 import styles from './MainButton.module.css';
 
 
-export default function MainButton({ content }: { content: string }) {
+export default function MainButton({ content, onClick  }: { content: string, onClick?: () => void}) {
   return (
-    <button className={styles.mainButton}>{ content }</button>
+    <button onClick={onClick} className={styles.mainButton}>{ content }</button>
   )
 }

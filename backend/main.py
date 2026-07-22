@@ -4,6 +4,16 @@ from pydantic import BaseModel
 from typing import Any, Optional
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from godot_video_converter import convertFile
+from fastapi.middleware.cors import CORSMiddleware
+
+import uuid, shutil
+
+origins = [
+    "*"
+]
+
+INPUT_DIR = Path("input")
+OUTPUT_DIR = Path("output")
 
 class UploadData(BaseModel):
     filename: str | None
@@ -32,6 +42,17 @@ def is_video_valid(file):
         raise HTTPException(400, "No file added")
 
 
+async def upload_videos(files: list[UploadFile] = File(...)):
+    if not (INPUT_DIR).exists():
+        INPUT_DIR.mkdir() # Create input folder if it does not exist
+    saved = []
+    for file in files:
+       file_path = INPUT_DIR / Path(f"{file.filename}")
+       with file_path.open("wb") as buffer:
+           shutil.copyfileobj(file.file, buffer)
+       saved.append(file.filename)
+    return saved
+
 async def upload_video(file):
     file_name = Path(f"{file.filename}")
     if not Path('input').exists():
@@ -49,24 +70,35 @@ app = FastAPI()
 video_formats = ["video/mp4", "video/mkv", "video/mov", "video/gif, video/avi"]
 options = {"video_quality": 5, "audio_quality": 5}
 
+# Add Cors Middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_headers=[""]
+)
 
 @app.get("/health")
 def read_root():
     return {"status": "healthy"}
 
 
-@app.post("/upload", status_code=201, response_model=UploadResponse)
+@app.post("/upload", response_model=UploadResponse, )
 async def upload_controller(file: UploadFile):
     is_video_valid(file)
     await upload_video(file)
     return UploadResponse(
         success= True,
-        message= "Video uploaded succesfully",
-        data= UploadData(
-            filename= file.filename,
-            size= file.size,
-        )
+        message= "Videos uploaded succesfully",
     )
+@app.get('/videos')
+async def get_videos():
+    listaVideos = []
+    input_folder = Path('./input')
+    for x in input_folder.iterdir():
+        if x.is_file():
+            listaVideos.append(x)
+
+    return
 @app.get("/download")
 async def download_video():
     return DownloadResponse(
