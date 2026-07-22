@@ -30,6 +30,9 @@ class DownloadResponse(BaseModel):
     message: str
     data: DownloadData | None
 
+class ConvertRequest(BaseModel):
+    filename: str
+
 def is_video_valid(file):
     if file.size == 0:
         raise HTTPException(400, "Empty file")
@@ -96,6 +99,19 @@ async def download_video():
             size = 0
         )
     )
+@app.post("/convert_file")
+async def convert_file(request: ConvertRequest):
+    file_path_obj = Path(request.filename)
+    file_path = Path(f"./input/{file_path_obj}")
+    if not Path('output').exists():
+        Path('output').mkdir()
+    output_path = Path(f"output/{file_path_obj.stem}.ogv")
+    convertFile(file_path, options, output_path)
+    output_file = output_path.read_bytes()
+    if output_file == 0:
+        raise HTTPException(500, "Converted file is empty")
+    return {"message: Succesfully converted the video"}
+
 @app.post("/convert")
 async def convert_video(file: UploadFile):
     is_video_valid(file)
