@@ -1,4 +1,5 @@
 from pathlib import Path
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from fastapi import FastAPI,  HTTPException, UploadFile
 from godot_video_converter import convertFile
@@ -89,15 +90,15 @@ async def get_videos():
     return {
         "videos": videoList
     }
-@app.get("/download")
-async def download_video():
-    return DownloadResponse(
-        success = True,
-        message = "Video downloaded succesfully",
-        data = DownloadData(
-            filename = "FileName",
-            size = 0
-        )
+@app.get("/download/{filename}")
+async def download_video(filename: str):
+    file_path = OUTPUT_DIR / filename
+    if not file_path.exists():
+        raise HTTPException(400, "File does not exist")
+    return FileResponse(
+        path=file_path,
+        filename=filename,
+        media_type="video/ogg"
     )
 @app.post("/convert_file")
 async def convert_file(request: ConvertRequest):
