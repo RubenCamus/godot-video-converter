@@ -1,11 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-
-
-
-
-
-
 const fileElement = document.getElementById("input-files") as HTMLInputElement;
 const convertButton = document.getElementById("convert-button");
 const uploadButton = document.getElementById("upload-button");

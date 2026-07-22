@@ -1,12 +1,9 @@
-from http import HTTPStatus
 from pathlib import Path
 from pydantic import BaseModel
-from typing import Any, Optional
-from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi import FastAPI,  HTTPException, UploadFile
 from godot_video_converter import convertFile
 from fastapi.middleware.cors import CORSMiddleware
 
-import uuid, shutil
 
 origins = [
     "*"
@@ -41,17 +38,6 @@ def is_video_valid(file):
     if file is None:
         raise HTTPException(400, "No file added")
 
-
-async def upload_videos(files: list[UploadFile] = File(...)):
-    if not (INPUT_DIR).exists():
-        INPUT_DIR.mkdir() # Create input folder if it does not exist
-    saved = []
-    for file in files:
-       file_path = INPUT_DIR / Path(f"{file.filename}")
-       with file_path.open("wb") as buffer:
-           shutil.copyfileobj(file.file, buffer)
-       saved.append(file.filename)
-    return saved
 
 async def upload_video(file):
     file_name = Path(f"{file.filename}")
@@ -92,13 +78,14 @@ async def upload_controller(file: UploadFile):
     )
 @app.get('/videos')
 async def get_videos():
-    listaVideos = []
+    videoList = []
     input_folder = Path('./input')
     for x in input_folder.iterdir():
         if x.is_file():
-            listaVideos.append(x)
-
-    return
+            videoList.append(x)
+    return {
+        "videos": videoList
+    }
 @app.get("/download")
 async def download_video():
     return DownloadResponse(
