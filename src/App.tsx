@@ -4,20 +4,25 @@ import { VideoData } from './types/video';
 import DropArea from './components/DropArea/DropArea';
 import MainButton from './components/MainButton/MainButton';
 import SecondaryButton from './components/SecondaryButton/SecondaryButton';
-import {convertVideo, downloadVideo} from "./services/FrontService";
+import {convertVideo, downloadVideo, getVideos} from "./services/FrontService";
+import { useState } from 'react';
 // Change with API fetch
-const video: VideoData = {
-  filename: "placeholder.mp4",
-  format: "mp4",
-  size: 15010,
-  length: 30
-}
 const App = () => {
+  const [videos, setVideos] = useState<VideoData[]>([]);
+  async function loadVideos() {
+    const response = await getVideos();
+    setVideos(response.videos);
+  }
+  loadVideos();
   return (
     <>
       <DropArea></DropArea>
       <h2>Your videos</h2>
-      <VideoComponent video={video} />
+      <>
+        {videos.map(video => (
+          <VideoComponent video={video} />
+        ))}
+      </>
       <div>
         <SecondaryButton content='Choose Format'></SecondaryButton>
         <MainButton onClick={convertVideo} content='Convert'></MainButton>

@@ -86,7 +86,11 @@ async def get_videos():
     input_folder = Path('./input')
     for x in input_folder.iterdir():
         if x.is_file():
-            videoList.append(x.name)
+            videoObject = {
+                "filename": x.name,
+                "format": x.suffix
+            }
+            videoList.append(videoObject)
     return {
         "videos": videoList
     }

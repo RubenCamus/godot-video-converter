@@ -31,7 +31,6 @@
 .videoImage {
     border-radius: 1em 1em 0 0 ;
     width: 100%;
-    object-fit: cover;
     height: 100%;
     margin-bottom: 0.5em;
 }

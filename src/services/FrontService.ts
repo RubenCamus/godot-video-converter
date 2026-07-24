@@ -4,7 +4,7 @@ export async function convertVideo() {
   const videosArray = await getVideos();
   console.log(videosArray);
   for (let i = 0; i < videosArray.videos.length; i++) {
-    fetch(`${backendURL}/convert_file/${videosArray.videos[i]}`, {
+    fetch(`${backendURL}/convert_file/${videosArray.videos[i].filename}`, {
       method: "POST",
     });
   }
