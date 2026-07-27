@@ -9,8 +9,8 @@ export default function DropArea() {
         <img id={styles.cloudIcon} src="cloud-upload.svg" alt="cloud upload" />
         <span>Drag your videos here</span>
         <span>or select from your device</span>
-        <input id="input-files" type="file" accept="video/*" multiple />
-        {/*<MainButton content={"Select your files here"}/>*/}
+        <label htmlFor="selectedFile" className={styles.selectedFile}>Select your file</label>
+        <input id={styles.selectedFile} type="file" accept="video/*" multiple />
         <span id={styles.formatsText}>{"Accepted file formats - " + "maxFileSize"}</span>
         <MainButton  content="Upload videos" onClick={uploadVideos}></MainButton>
       </div>

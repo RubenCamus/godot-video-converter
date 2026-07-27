@@ -1,3 +1,5 @@
+import { VideoData } from "../types/video";
+
 const backendURL = "http://127.0.0.1:8000";
 
 export async function convertVideo() {
@@ -6,8 +8,13 @@ export async function convertVideo() {
   for (let i = 0; i < videosArray.videos.length; i++) {
     fetch(`${backendURL}/convert_file/${videosArray.videos[i].filename}`, {
       method: "POST",
-    });
+    })
   }
+  videosArray.map((video: VideoData) => {
+    fetch(`${backendURL}/convert_file/${video.filename}`, {
+      method: "POST",
+    });
+  });
 }
 export async function downloadVideo(video_name: string) {
   video_name = "VideoWordle.ogv";

@@ -5,24 +5,32 @@ import DropArea from './components/DropArea/DropArea';
 import MainButton from './components/MainButton/MainButton';
 import SecondaryButton from './components/SecondaryButton/SecondaryButton';
 import {convertVideo, downloadVideo, getVideos} from "./services/FrontService";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+// Import Styles
+import './index.css'
+import './variables.css'
 // Change with API fetch
 const App = () => {
   const [videos, setVideos] = useState<VideoData[]>([]);
-  async function loadVideos() {
-    const response = await getVideos();
-    setVideos(response.videos);
-  }
-  loadVideos();
+  useEffect(() => {
+    async function loadVideos() {
+      const response = await getVideos();
+      setVideos(response.videos);
+    }
+    loadVideos();
+  }, []);
+
+
   return (
     <>
       <DropArea></DropArea>
       <h2>Your videos</h2>
-      <>
+      <div className='dynamic-videos-wrapper'>
         {videos.map(video => (
-          <VideoComponent video={video} />
+          <VideoComponent key={video.filename} video={video} />
         ))}
-      </>
+      </div>
       <div>
         <SecondaryButton content='Choose Format'></SecondaryButton>
         <MainButton onClick={convertVideo} content='Convert'></MainButton>

@@ -1,0 +1,19 @@
+
+
+:root {
+    /*Color Variables*/
+    --color-primary: #4487B9;
+    --color-primary-hover: #45ACBA;
+
+    --color-secondary: #70B0CC;
+    --color-secondary-hover: #7076CC;
+
+    --color-background: #F5F1F3;
+    --color-surface: #1B1D2D;
+
+    --color-border: #775B73 ;
+
+    --color-accent: #775B73;
+
+    --radius: 5px;
+}

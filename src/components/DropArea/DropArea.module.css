@@ -24,7 +24,24 @@
     align-items: center;
     width: 90vw;
     height: 20em;
-    background-color: black;
-    border-radius: 1em;
+    background-color: var(--color-accent);
+    border-radius: var(--radius);
     margin-bottom: 1em;
+}
+.selectedFile {
+    border: 1px solid white;
+    border-radius: 5px;
+    width: 8em;
+    background-color: lightgrey;
+    text-align: center;
+    padding: 0.2em;
+    box-shadow: 1px 1px black;
+}
+.selectedFile:hover {
+    box-shadow: 0 0 black;
+    background-color: aliceblue;
+    transition: all ease 300ms;
+}
+#selectedFile {
+    display: none;
 }
