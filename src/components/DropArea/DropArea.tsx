@@ -6,7 +6,7 @@ export default function DropArea() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.textWrapper}>
-        <img id={styles.cloudIcon} src="cloud-upload.svg" alt="cloud upload" />
+        <img id={styles.cloudIcon} src="/src/public/cloud-upload-white.svg" alt="cloud upload" />
         <span>Drag your videos here</span>
         <span>or select from your device</span>
         <label htmlFor="selectedFile" className={styles.selectedFile}>Select your file</label>

@@ -25,16 +25,21 @@ const App = () => {
   return (
     <>
       <DropArea></DropArea>
-      <h2>Your videos</h2>
+      <div className='videos-title'>
+        <h2>Your videos</h2>
+        <SecondaryButton content='Choose Format'></SecondaryButton>
+      </div>
       <div className='dynamic-videos-wrapper'>
         {videos.map(video => (
           <VideoComponent key={video.filename} video={video} />
         ))}
       </div>
       <div>
-        <SecondaryButton content='Choose Format'></SecondaryButton>
         <MainButton onClick={convertVideo} content='Convert'></MainButton>
         <MainButton onClick={downloadVideo} content="Download"></MainButton>
+      </div>
+      <div>
+        <h2>Output files</h2>
       </div>
     </>
   )

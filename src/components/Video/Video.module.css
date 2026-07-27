@@ -2,31 +2,31 @@
     width: 15rem;
     height: 15rem;
     border: black 3px solid;
-    border-radius: 1em;
+    border-radius: var(--radius);
+    background-color: var(--color-accent);
 }
 .videoImageWrapper {
     height: 50%;
 }
 .videoTextWrapper {
-    padding: 0.5em;
     display: flex;
     flex-direction: column;
     font-size: 1em;
     font-weight: 600;
 }
-.videoTextWrapper span {
+.videoTextWrapper p {
     font-size: 1.5em;
-    color: white;
+    color: var(--color-background);
+    width: fit-content;
+    overflow: hidden;
 }
 .videoDataWrapper {
     display: flex;
 }
 .videoDataWrapper span {
-    color: grey;
-    font-size: 1em;
-    margin-top: 0.5em;
-    margin-right: 0.5em;
-    font-weight: normal;
+    color: var(--color-secondary);
+    font-size: 1.2em;
+    font-weight: bold;
 }
 .videoImage {
     border-radius: 1em 1em 0 0 ;

@@ -10,10 +10,7 @@
 
     --color-background: #F5F1F3;
     --color-surface: #1B1D2D;
-
-    --color-border: #775B73 ;
-
     --color-accent: #775B73;
 
-    --radius: 5px;
+    --radius: 10px;
 }

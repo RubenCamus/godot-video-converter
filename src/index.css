@@ -11,3 +11,6 @@
 .dynamic-videos-wrapper  * {
     margin-inline: 0.5em;
 }
+.videos-title {
+    display: flex;
+}

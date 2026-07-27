@@ -8,10 +8,10 @@ export default function VideoComponent({video}: VideoComponentProps) {
   return (
     <div className={styles.videoWrapper}>
       <div className={styles.videoImageWrapper}>
-        <img src="src/public/video-icon.svg" alt="placeholder image" className={styles.videoImage} />
+        <img src="src/public/video-icon-white.svg" alt="placeholder image" className={styles.videoImage} />
       </div>
       <div className={styles.videoTextWrapper}>
-        <span>{video.filename}</span>
+        <p>{video.filename}</p>
         <div className={styles.videoDataWrapper}>
           <span>{video.format.toUpperCase()}</span>
           <span>{video.length}</span>
