@@ -1,5 +1,7 @@
 import styles from './Video.module.css';
 import { VideoData } from "../../types/video";
+import { downloadVideo } from '../../services/FrontService';
+import MainButton from '../MainButton/MainButton';
 interface VideoComponentProps {
   video: VideoData
 }
@@ -16,6 +18,7 @@ export default function VideoComponent({video}: VideoComponentProps) {
           <span>{video.format.toUpperCase()}</span>
           <span>{video.length}</span>
         </div>
+        <MainButton onClick={downloadVideo(video.filename)} content="Download"></MainButton>
       </div>
     </div>
   )

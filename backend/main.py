@@ -94,6 +94,20 @@ async def get_videos():
     return {
         "videos": videoList
     }
+@app.get('/output')
+async def get_output():
+    videoList = []
+    input_folder = Path('./output')
+    for x in input_folder.iterdir():
+        if x.is_file():
+            videoObject = {
+                "filename": x.name,
+                "format": x.suffix
+            }
+            videoList.append(videoObject)
+    return {
+        "videos": videoList
+    }
 @app.get("/download/{filename}")
 async def download_video(filename: str):
     file_path = OUTPUT_DIR / filename

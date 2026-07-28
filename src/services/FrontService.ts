@@ -17,13 +17,17 @@ export async function convertVideo() {
   });
 }
 export async function downloadVideo(video_name: string) {
-  video_name = "VideoWordle.ogv";
   const response = await fetch(`${backendURL}/download/${video_name}`);
   const video = response.blob();
   return video;
 }
 export async function getVideos() {
   const videos = await fetch(`${backendURL}/videos`);
+  const response = await videos.json();
+  return response;
+}
+export async function getOutputVideos() {
+  const videos = await fetch(`${backendURL}/output`);
   const response = await videos.json();
   return response;
 }

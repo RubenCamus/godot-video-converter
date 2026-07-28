@@ -1,23 +1,30 @@
+import { useId } from "react";
 import MainButton from "../MainButton/MainButton"
 import styles from './DropArea.module.css';
 
-
 export default function DropArea() {
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.textWrapper}>
-        <img id={styles.cloudIcon} src="/src/public/cloud-upload-white.svg" alt="cloud upload" />
-        <span>Drag your videos here</span>
-        <span>or select from your device</span>
-        <label htmlFor="selectedFile" className={styles.selectedFile}>Select your file</label>
-        <input id={styles.selectedFile} type="file" accept="video/*" multiple />
-        <span id={styles.formatsText}>{"Accepted file formats - " + "maxFileSize"}</span>
-        <MainButton  content="Upload videos" onClick={uploadVideos}></MainButton>
+    <div className="dropArea">
+      <div className={styles.wrapper}>
+        <div className={styles.textWrapper}>
+          <img id={styles.cloudIcon} src="/src/public/cloud-upload-white.svg" alt="cloud upload" />
+          <span>Drag your videos here</span>
+          <span>or select from your device</span>
+          <label htmlFor="selectedFile" className={styles.selectedFile}>Select your file</label>
+          <input className={styles.fileInput} id="selectedFile" type="file" accept="video/*" multiple onChange={handleInputFiles} />
+          <span id={styles.formatsText}>{"Accepted file formats - " + "maxFileSize"}</span>
+          <MainButton  content="Upload videos" onClick={uploadVideos}></MainButton>
+        </div>
       </div>
     </div>
   )
 }
+async function handleInputFiles(event: React.ChangeEvent<HTMLInputElement>) {
+  const files = event.target.files;
 
+  if (!files) return;
+
+}
 async function uploadVideos() {
   const fileElement = document.getElementById('input-files') as HTMLInputElement;
   console.log("Upload Video");

@@ -24,7 +24,7 @@
     align-items: center;
     width: 100%;
     height: 20em;
-    background-color: var(--color-accent);
+    background-color: var(--color-surface);
     border-radius: var(--radius);
     margin-bottom: 1em;
 }
@@ -44,7 +44,7 @@
     background-color: var(--color-secondary-hover);
     transition: all ease 300ms;
 }
-#selectedFile {
+.fileInput {
     display: none;
 }
 #cloudIcon {
