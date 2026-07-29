@@ -17,17 +17,17 @@ export async function convertVideo() {
   });
 }
 export async function downloadVideo(video_name: string) {
-  const response = await fetch(`${backendURL}/download/${video_name}`);
+  const response = await fetch(`${backendURL}/download/${video_name}`); // Returns a file
   const video = response.blob();
   return video;
 }
 export async function getVideos() {
-  const videos = await fetch(`${backendURL}/videos`);
+  const videos = await fetch(`${backendURL}/videos`); // Returns {videos} containing an array of videos in  objects from input folder.
   const response = await videos.json();
   return response;
 }
 export async function getOutputVideos() {
-  const videos = await fetch(`${backendURL}/output`);
+  const videos = await fetch(`${backendURL}/output`); // Returns {videos} containing an array of videos in  objects from input folder.
   const response = await videos.json();
   return response;
 }
