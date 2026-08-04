@@ -18,22 +18,23 @@ const App = () => {
     const response = await getVideos();
     setVideos(response.videos);
   }
-
+  async function loadOutputVideos() {
+        const response = await getOutputVideos();
+        setOutputVideos(response.videos);
+      }
   useEffect(() => {
     loadVideos();
   }, []);
 
   const [outputVideos, setOutputVideos] = useState<VideoData[]>([]);
   useEffect(() => {
-    async function loadOutputVideos() {
-      const response = await getOutputVideos();
-      setOutputVideos(response.videos);
-    }
     loadOutputVideos();
   }, []);
-
   async function onUploadFinished() {
     await loadVideos();
+  }
+  async function onConvertFinished() {
+    await loadOutputVideos();
   }
   return (
     <>
@@ -48,7 +49,7 @@ const App = () => {
         ))}
       </div>
       <div>
-        <MainButton onClick={convertVideo} content='Convert'></MainButton>
+        <MainButton onClick={() => convertVideo(onConvertFinished)} content='Convert'></MainButton>
       </div>
       <div>
         <h2>Converted</h2>
