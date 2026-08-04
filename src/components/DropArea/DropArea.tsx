@@ -3,8 +3,7 @@ import MainButton from "../MainButton/MainButton"
 import styles from './DropArea.module.css';
 
 var fileList: File[] = [];
-
-export default function DropArea() {
+export default function DropArea({ onUpload }: { onUpload: () => void }) {
   const [isDragging, setIsDragging] = useState(false);
   function handleDragLeave(event: React.DragEvent<HTMLDivElement>) {
     event.preventDefault();
@@ -30,14 +29,32 @@ export default function DropArea() {
     if (!files) return;
 
     console.log(files);
-
     handleFiles(Array.from(files));
   }
   function handleFiles(files: File[]) {
     if (files.length == 0) { return "File list is empty"; }
       console.log("files are: ", files, "fileList is: ", fileList);
       fileList.push(...files);
-      console.log(fileList);
+    console.log(fileList);
+  }
+  async function uploadVideos() {
+    fileList.forEach(async (file) => {
+      const formData = new FormData();
+      formData.append("file", file)
+      try {
+        await uploadAPI("http://127.0.0.1:8000/upload", formData);
+        onUpload();
+        } catch (e) {
+            console.log(e);
+        }
+    })
+  }
+  async function uploadAPI(url: string, formData: FormData) {
+    const response = await fetch(url, {
+      method: "POST",
+      body: formData,
+    });
+    return response;
   }
   // Component TSX
   return (
@@ -55,22 +72,4 @@ export default function DropArea() {
       </div>
     </div>
   )
-}
-async function uploadVideos() {
-  fileList.forEach(async (file) => {
-    const formData = new FormData();
-    formData.append("file", file)
-    try {
-        await uploadAPI("http://127.0.0.1:8000/upload", formData);
-      } catch (e) {
-          console.log(e);
-      }
-  })
-}
-async function uploadAPI(url: string, formData: FormData) {
-  const response = await fetch(url, {
-    method: "POST",
-    body: formData,
-  });
-  return response;
 }

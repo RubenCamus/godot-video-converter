@@ -18,7 +18,6 @@ export default function VideoComponent({video}: VideoComponentProps) {
           <span>{video.format.toUpperCase()}</span>
           <span>{video.length}</span>
         </div>
-        <MainButton onClick={() => downloadVideo(video.filename)} content="Download"></MainButton>
       </div>
     </div>
   )

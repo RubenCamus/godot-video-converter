@@ -1,6 +1,6 @@
 .videoWrapper {
-    width: 15rem;
-    height: 15rem;
+    width: 10em;
+    height: 10em;
     border: black 3px solid;
     border-radius: var(--radius);
     background-color: var(--color-accent);
@@ -15,12 +15,11 @@
 .videoTextWrapper {
     display: flex;
     flex-direction: column;
-    font-size: 1em;
-    font-weight: 600;
 }
 .videoTextWrapper p {
-    font-size: 1.5em;
-    color: var(--color-background);
+    font-size: 1em;
+    font-weight: 600;
+    color: var(--color-secondary);
     width: fit-content;
     overflow: hidden;
 }
@@ -28,8 +27,8 @@
     display: flex;
 }
 .videoDataWrapper span {
-    color: var(--color-secondary);
-    font-size: 1.2em;
+    color: var(--color-background);
+    font-size: 1em;
     font-weight: bold;
 }
 .videoImage {

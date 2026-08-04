@@ -13,11 +13,13 @@ import './variables.css'
 // Change with API fetch
 const App = () => {
   const [videos, setVideos] = useState<VideoData[]>([]);
+
+  async function loadVideos() {
+    const response = await getVideos();
+    setVideos(response.videos);
+  }
+
   useEffect(() => {
-    async function loadVideos() {
-      const response = await getVideos();
-      setVideos(response.videos);
-    }
     loadVideos();
   }, []);
 
@@ -30,10 +32,12 @@ const App = () => {
     loadOutputVideos();
   }, []);
 
-
+  async function onUploadFinished() {
+    await loadVideos();
+  }
   return (
     <>
-      <DropArea></DropArea>
+      <DropArea onUpload={onUploadFinished}></DropArea>
       <div className='videos-title'>
         <h2>Uploads</h2>
         <SecondaryButton content='Choose Format'></SecondaryButton>

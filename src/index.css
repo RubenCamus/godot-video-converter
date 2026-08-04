@@ -14,3 +14,12 @@
 .videos-title {
     display: flex;
 }
+
+h2 {
+    color: var(--color-primary);
+}
+
+/*body {
+    margin-left: 10em;
+    margin-right: 10em;
+}*/
