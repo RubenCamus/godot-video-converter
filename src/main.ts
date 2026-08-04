@@ -3,6 +3,8 @@ import path from "node:path";
 import started from "electron-squirrel-startup";
 
 import { spawn } from "node:child_process";
+import { shell } from "electron/common";
+import { ipcMain } from "electron/main";
 
 let backendProcess: any;
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -79,3 +81,8 @@ async function initBackend() {
     },
   );
 }
+
+ipcMain.handle("open-output-folder", async () => {
+  console.log("mi mama");
+  return await shell.openPath('C:/Users/Ruben/Desktop/dev/godot-toolkit/backend/output');
+})

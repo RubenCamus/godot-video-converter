@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 // Import Styles
 import './index.css'
 import './variables.css'
+import { shell } from 'electron/common';
 // Change with API fetch
 const App = () => {
   const [videos, setVideos] = useState<VideoData[]>([]);
@@ -59,7 +60,8 @@ const App = () => {
                 ))}
               </div>
       </div>
-      <MainButton onClick={() => downloadVideo} content="Download All"></MainButton>
+      {/*<MainButton onClick={() => downloadVideo} content="Download All"></MainButton>*/}
+      <MainButton onClick={() => window.api.openOutputFolder()} content='open folder'></MainButton>
     </>
   )
 }
