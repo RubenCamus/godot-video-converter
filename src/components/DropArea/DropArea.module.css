@@ -14,7 +14,8 @@
     font-size: 1em;
 }
 .textWrapper  span:nth-of-type(3){
-    color: var(--color-secondary);
+    margin-top: 0.5em;
+    color: var(--color-background);
     font-size: 1em;
 }
 .wrapper {
@@ -23,8 +24,8 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 20em;
-    background-color: var(--color-surface);
+    height: fit-content;
+    background-color: var(--color-primary);
     border-radius: var(--radius);
     margin-bottom: 1em;
 }
@@ -60,7 +61,7 @@
 }
 .dragging {
     z-index: 9999;
-    background-color: rgba(255, 0, 0, 0.5);
+    background-color: rgba(255, 200, 100, 0.5);
     position: relative;
     width: 100%;
     height: 100%;

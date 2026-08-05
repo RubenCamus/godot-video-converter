@@ -52,14 +52,12 @@ const App = () => {
       <div>
         <MainButton onClick={() => convertVideo(onConvertFinished)} content='Convert'></MainButton>
       </div>
-      <div>
         <h2>Converted</h2>
         <div className='dynamic-videos-wrapper'>
                 {outputVideos.map(video => (
                   <VideoComponent key={video.filename} video={video} />
                 ))}
-              </div>
-      </div>
+        </div>
       {/*<MainButton onClick={() => downloadVideo} content="Download All"></MainButton>*/}
       <MainButton onClick={() => window.api.openOutputFolder()} content='open folder'></MainButton>
     </>

@@ -1,9 +1,9 @@
 .videoWrapper {
-    width: 10em;
-    height: 10em;
+    width: 100%;
+    height: 100%;
     border: black 3px solid;
     border-radius: var(--radius);
-    background-color: var(--color-accent);
+    background-color: var(--color-primary);
 }
 .videoImageWrapper {
     display: flex;
@@ -19,7 +19,7 @@
 .videoTextWrapper p {
     font-size: 1em;
     font-weight: 600;
-    color: var(--color-secondary);
+    color: white;
     width: fit-content;
     overflow: hidden;
 }
