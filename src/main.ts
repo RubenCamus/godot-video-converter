@@ -5,7 +5,7 @@ import started from "electron-squirrel-startup";
 import { spawn } from "node:child_process";
 import { shell } from "electron/common";
 import { ipcMain } from "electron/main";
-
+import { rm, rmSync, rmdirSync } from "node:fs";
 let backendProcess: any;
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
@@ -54,7 +54,8 @@ app.on("before-quit", () => {
   if (backendProcess) {
     backendProcess.kill();
   }
-
+  console.log("BORRAR INPUT");
+  deleteInput();
 });
 app.on("activate", () => {
   // On OS X it's common to re-create a window in the app when the
@@ -84,6 +85,10 @@ async function initBackend() {
 }
 function deleteInput() {
   const inputFolder = path.join(__dirname, "../../backend/input");
+  rmSync(inputFolder, {
+    force: true,
+    recursive: true,
+  })
 }
 ipcMain.handle("open-output-folder", async () => {
   return await shell.openPath('C:/Users/Ruben/Desktop/dev/godot-toolkit/backend/output');
