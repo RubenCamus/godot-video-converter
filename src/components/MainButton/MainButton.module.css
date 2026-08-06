@@ -1,7 +1,7 @@
 .mainButton {
     margin: 1em;
     border-radius: var(--radius);
-    background-color: var(--color-accent);
+    background-color: var(--color-primary);
     color: white;
     width: 10em ;
     font-size: 1em;

@@ -54,6 +54,7 @@ app.on("before-quit", () => {
   if (backendProcess) {
     backendProcess.kill();
   }
+
 });
 app.on("activate", () => {
   // On OS X it's common to re-create a window in the app when the
@@ -81,7 +82,9 @@ async function initBackend() {
     },
   );
 }
-
+function deleteInput() {
+  const inputFolder = path.join(__dirname, "../../backend/input");
+}
 ipcMain.handle("open-output-folder", async () => {
   return await shell.openPath('C:/Users/Ruben/Desktop/dev/godot-toolkit/backend/output');
 })

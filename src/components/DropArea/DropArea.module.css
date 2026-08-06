@@ -32,7 +32,7 @@
     border: 1px solid black;
     border-radius: 5px;
     width: 8em;
-    background-color: var(--color-secondary);
+    background-color: var(--color-accent);
     color: white;
     font-weight: bold;
     text-align: center;
@@ -42,8 +42,8 @@
 }
 .selectedFile:hover {
     box-shadow: 0 0 black;
-    background-color: var(--color-secondary-hover);
-    transition: all ease 300ms;
+    opacity: 0.85;
+    transition: all ease 200ms;
 }
 .fileInput {
     display: none;
