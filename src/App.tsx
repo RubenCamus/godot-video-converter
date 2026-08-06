@@ -12,6 +12,7 @@ import './index.css'
 import './variables.css'
 import { shell } from 'electron/common';
 import Footer from './components/Footer/Footer';
+import SelectOption from './components/SelectOption/SelectOption';
 // Change with API fetch
 const App = () => {
   const [videos, setVideos] = useState<VideoData[]>([]);
@@ -43,7 +44,8 @@ const App = () => {
       <DropArea onUpload={onUploadFinished}></DropArea>
       <div className='videos-title'>
         <h2>Uploads</h2>
-        <SecondaryButton content='Choose Format'></SecondaryButton>
+        <span>Choose format: </span>
+        <SelectOption></SelectOption>
       </div>
       <div className='dynamic-videos-wrapper'>
         {videos.map(video => (

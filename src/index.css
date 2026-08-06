@@ -17,8 +17,14 @@ body * {
 }
 .videos-title {
     display: flex;
+    align-items: center;
 }
-
+.videos-title * {
+    margin-inline: 0.5em;
+}
+.videos-title span{
+    color: var(--color-surface);
+}
 h2 {
     color: var(--color-primary);
 }
