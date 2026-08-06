@@ -83,6 +83,5 @@ async function initBackend() {
 }
 
 ipcMain.handle("open-output-folder", async () => {
-  console.log("mi mama");
   return await shell.openPath('C:/Users/Ruben/Desktop/dev/godot-toolkit/backend/output');
 })

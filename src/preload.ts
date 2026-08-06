@@ -4,7 +4,6 @@ import { contextBridge, ipcRenderer } from 'electron';
 
 contextBridge.exposeInMainWorld('api', {
   openOutputFolder: () => {
-    console.log("preload");
     ipcRenderer.invoke("open-output-folder");
   }
 });

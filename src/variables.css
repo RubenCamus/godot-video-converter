@@ -2,14 +2,14 @@
 
 :root {
     /*Color Variables*/
-    --color-primary: #4487B9;
-    --color-primary-hover: #203E66;
-    --color-secondary: #70B0CC;
-    --color-secondary-hover: #7076CC;
+    --color-primary: #53A5E0;
+    --color-primary-hover: #348D87;
+    --color-secondary: #62C9FF;
+    --color-secondary-hover: #689FC8;
 
-    --color-background: #F5F1F3;
-    --color-surface: #1B1D2D;
-    --color-accent: #775B73;
+    --color-background: #25282B;
+    --color-surface: #FCFCFC;
+    --color-accent: #F35774;
 
     --radius: 10px;
 }

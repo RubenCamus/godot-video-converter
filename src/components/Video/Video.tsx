@@ -10,7 +10,7 @@ export default function VideoComponent({video}: VideoComponentProps) {
   return (
     <div className={styles.videoWrapper}>
       <div className={styles.videoImageWrapper}>
-        <img src="src/public/video-icon-white.svg" alt="placeholder image" className={styles.videoImage} />
+        <img src="/src/public/video-icon-white.svg" alt="placeholder image" className={styles.videoImage} />
       </div>
       <div className={styles.videoTextWrapper}>
         <p>{video.filename}</p>

@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import './index.css'
 import './variables.css'
 import { shell } from 'electron/common';
+import Footer from './components/Footer/Footer';
 // Change with API fetch
 const App = () => {
   const [videos, setVideos] = useState<VideoData[]>([]);
@@ -60,6 +61,7 @@ const App = () => {
         </div>
       {/*<MainButton onClick={() => downloadVideo} content="Download All"></MainButton>*/}
       <MainButton onClick={() => window.api.openOutputFolder()} content='open folder'></MainButton>
+      <Footer></Footer>
     </>
   )
 }
