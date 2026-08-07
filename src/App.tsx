@@ -30,9 +30,9 @@ const App = () => {
   }, []);
 
   const [outputVideos, setOutputVideos] = useState<VideoData[]>([]);
-  useEffect(() => {
-    loadOutputVideos();
-  }, []);
+  // useEffect(() => {
+  //   loadOutputVideos();
+  // }, []);
   async function onUploadFinished() {
     await loadVideos();
   }
@@ -42,9 +42,11 @@ const App = () => {
   return (
     <>
       <DropArea onUpload={onUploadFinished}></DropArea>
+      {/*DISPLAY ADDED FILES BEFORE UPLOADING*/}
+      {/*ADD UPLOADING PROGRESS*/}
       <div className='videos-title'>
         <h2>Uploads</h2>
-        <span>Choose format: </span>
+        <span>Format: </span>
         <SelectOption></SelectOption>
       </div>
       <div className='dynamic-videos-wrapper'>
@@ -55,7 +57,8 @@ const App = () => {
       <div>
         <MainButton onClick={() => convertVideo(onConvertFinished)} content='Convert'></MainButton>
       </div>
-        <h2>Converted</h2>
+      <h2>Converted</h2>
+        {/*ADD PROGRESS FOR VIDEO CONVERTING*/}
         <div className='dynamic-videos-wrapper'>
                 {outputVideos.map(video => (
                   <VideoComponent key={video.filename} video={video} />

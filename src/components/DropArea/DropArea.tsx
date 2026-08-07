@@ -1,7 +1,7 @@
 import { useState } from "react";
 import MainButton from "../MainButton/MainButton"
 import styles from './DropArea.module.css';
-
+import { maxFileSize } from '../../config';
 var fileList: File[] = [];
 export default function DropArea({ onUpload }: { onUpload: () => void }) {
   const [isDragging, setIsDragging] = useState(false);
@@ -33,8 +33,17 @@ export default function DropArea({ onUpload }: { onUpload: () => void }) {
   }
   function handleFiles(files: File[]) {
     if (files.length == 0) { return "File list is empty"; }
-      console.log("files are: ", files, "fileList is: ", fileList);
-      fileList.push(...files);
+    // Loop through added files
+    files.forEach(file => {
+      const fileSize = file.size;
+      const fileSizeMegabytes = (fileSize / 1024) / 1024;
+      if (fileSizeMegabytes > maxFileSize) {
+        console.log("File is too big for upload");
+        files.splice(files.indexOf(file), 1);
+      }
+    });
+    console.log("files are: ", files, "fileList is: ", fileList);
+    fileList.push(...files);
     console.log(fileList);
   }
   async function uploadVideos() {
