@@ -15,7 +15,7 @@ export default function VideoComponent({ video }: VideoComponentProps) {
     console.log("Changed selection from", selected, "to ", !selected);
   }
   return (
-    <div onClick={handleSelection} className={styles.videoWrapper}>
+    <div id='wrap' onClick={handleSelection} className={`${styles.videoWrapper}, ${selected ? styles.videoSelected : styles.videoWrapper}`}>
       <div className={styles.videoImageWrapper}>
         <img src="/src/public/video-icon-white.svg" alt="placeholder image" className={styles.videoImage} />
       </div>
