@@ -16,7 +16,7 @@ import SelectOption from './components/SelectOption/SelectOption';
 // Change with API fetch
 const App = () => {
   const [videos, setVideos] = useState<VideoData[]>([]);
-
+  const format = "ogv";
   async function loadVideos() {
     const response = await getVideos();
     setVideos(response.videos);
@@ -24,12 +24,14 @@ const App = () => {
   async function loadOutputVideos() {
         const response = await getOutputVideos();
         setOutputVideos(response.videos);
-      }
-  useEffect(() => {
-    loadVideos();
-  }, []);
+  }
+  // --- THIS LOADS VIDEOS FROM FOLDER ON START ---
+  // useEffect(() => {
+  //   loadVideos();
+  // }, []);
 
   const [outputVideos, setOutputVideos] = useState<VideoData[]>([]);
+  // --- THIS LOADS VIDEOS FROM FOLDER ON START ---
   // useEffect(() => {
   //   loadOutputVideos();
   // }, []);
@@ -55,7 +57,7 @@ const App = () => {
         ))}
       </div>
       <div>
-        <MainButton onClick={() => convertVideo(onConvertFinished)} content='Convert'></MainButton>
+        <MainButton onClick={() => convertVideo(format, onConvertFinished)} content='Convert'></MainButton>
       </div>
       <h2>Converted</h2>
         {/*ADD PROGRESS FOR VIDEO CONVERTING*/}

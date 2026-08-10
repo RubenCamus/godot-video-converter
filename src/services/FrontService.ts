@@ -2,7 +2,7 @@ import { VideoData } from "../types/video";
 
 const backendURL = "http://127.0.0.1:8000";
 
-export async function convertVideo(onConvert:() => void ) {
+export async function convertVideo(format:string, onConvert:() => void ) {
   const videosArray = await getVideos();
   console.log(videosArray);
   for (let i = 0; i < videosArray.videos.length; i++) {
