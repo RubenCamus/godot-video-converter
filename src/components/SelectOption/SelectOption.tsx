@@ -2,7 +2,6 @@ import styles from './SelectOption.module.css';
 
 export default function SelectOption() {
 
-
   return (
     <div className={styles.selectWrapper}>
       <select className={styles.select} name="format" id="format">

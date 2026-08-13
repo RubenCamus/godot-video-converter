@@ -15,8 +15,32 @@ import Footer from './components/Footer/Footer';
 import SelectOption from './components/SelectOption/SelectOption';
 // Change with API fetch
 const App = () => {
+  const selectedInputVideos: Array<string> = [];
+  function addPollas(name: string) {
+    console.log(selectedInputVideos);
+    if (selectedInputVideos.includes(name)) {
+      const indexToDelete = selectedInputVideos.indexOf(name);
+      const removedItem = selectedInputVideos.splice(indexToDelete, 1);
+      console.log("Removed Item: ", removedItem);
+      return;
+    }
+    selectedInputVideos.push(name);
+    console.log("new selected input is", selectedInputVideos);
+  }
+
+  async function getSelectedVideos() {
+    const response = await getVideos();
+    const videos = response.videos;
+    for (let i = 0; i < videos.length; i++) {
+      const curVideo = videos[i];
+    }
+  }
+    // On click video component change useState
+    // if state is true add to selectedVideos array
+    //
+  const [selected, setSelected] = useState<boolean>();
   const [videos, setVideos] = useState<VideoData[]>([]);
-  const format = "ogv";
+  const [format, setFormat] = useState<string>("ogv");
   async function loadVideos() {
     const response = await getVideos();
     setVideos(response.videos);
@@ -25,16 +49,7 @@ const App = () => {
         const response = await getOutputVideos();
         setOutputVideos(response.videos);
   }
-  // --- THIS LOADS VIDEOS FROM FOLDER ON START ---
-  // useEffect(() => {
-  //   loadVideos();
-  // }, []);
-
   const [outputVideos, setOutputVideos] = useState<VideoData[]>([]);
-  // --- THIS LOADS VIDEOS FROM FOLDER ON START ---
-  // useEffect(() => {
-  //   loadOutputVideos();
-  // }, []);
   async function onUploadFinished() {
     await loadVideos();
   }
@@ -53,7 +68,7 @@ const App = () => {
       </div>
       <div className='dynamic-videos-wrapper'>
         {videos.map(video => (
-          <VideoComponent key={video.filename} video={video} />
+          <VideoComponent key={video.filename} video={video} isSelected={false} parentFunction={() => addPollas(video.filename)} />
         ))}
       </div>
       <div>
@@ -63,7 +78,7 @@ const App = () => {
         {/*ADD PROGRESS FOR VIDEO CONVERTING*/}
         <div className='dynamic-videos-wrapper'>
                 {outputVideos.map(video => (
-                  <VideoComponent key={video.filename} video={video} />
+                  <VideoComponent key={video.filename} video={video} isSelected={false} parentFunction={() => addPollas(video.filename)}/>
                 ))}
         </div>
       {/*<MainButton onClick={() => downloadVideo} content="Download All"></MainButton>*/}
