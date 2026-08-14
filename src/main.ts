@@ -82,6 +82,12 @@ async function initBackend() {
       cwd: backendDirectory,
     },
   );
+  backendProcess.stdout.on("data", (data: string) => {
+    console.log(`[Python] ${data}`);
+  })
+  backendProcess.stderr.on("error", (error: string) => {
+    console.error(`Python ERROR ${error}`);
+  })
 }
 function deleteInput() {
   const inputFolder = path.join(__dirname, "../../backend/input");

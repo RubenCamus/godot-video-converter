@@ -1,4 +1,6 @@
+import json
 from pathlib import Path
+from uuid import uuid4
 
 from fastapi import FastAPI, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
@@ -51,6 +53,22 @@ async def upload_video(file):
     video_bytes = await file.read()  # Read received file bytes
     file_path.write_bytes(video_bytes)
 
+async def generate_uuid(video_name):
+    # Check if metadata.json file exists
+    metadata_path = Path('./input/metadata.json')
+    if not metadata_path.exists():
+        metadata_path.touch(exist_ok=True) # Creates the metadata file, if already exists is success anyway.
+        metadata_path.write_text("[]");
+    x_uuid = uuid4() # create random uuid for the video
+    uuid = str(x_uuid) # Convert uuid to string. IF NOT JSON BREAKS
+    video_json = {
+        video_name: uuid
+    }
+    data_json = metadata_path.read_text()
+    data_py = json.loads(data_json) # json loads converts from json format to python object
+    data_py.append(video_json)
+    new_data_json = json.dumps(data_py) # json dumps converts python object to json format
+    metadata_path.write_text(new_data_json)
 
 def delete_video(file):
     file.unlink()
@@ -58,6 +76,7 @@ def delete_video(file):
 
 app = FastAPI()
 video_formats = ["video/mp4", "video/mkv", "video/mov", "video/gif, video/avi"]
+suffix_formats = [".mp4", ".mkv", ".mov", ".gif", ".avi"]
 options = {"video_quality": 5, "audio_quality": 5}
 
 # Add Cors Middleware
@@ -74,8 +93,10 @@ def read_root():
 
 @app.post("/upload", response_model=UploadResponse, )
 async def upload_controller(file: UploadFile):
+    print("Upload petition received")
     is_video_valid(file)
     await upload_video(file)
+    await generate_uuid(file.filename)
     return UploadResponse(
         success= True,
         message= "Videos uploaded succesfully",
@@ -85,7 +106,7 @@ async def get_videos():
     videoList = []
     input_folder = Path('./input')
     for x in input_folder.iterdir():
-        if x.is_file():
+        if x.is_file() and suffix_formats.count(x.suffix) > 0:
             videoObject = {
                 "filename": x.name,
                 "format": x.suffix

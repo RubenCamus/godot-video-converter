@@ -1,6 +1,6 @@
 import { VideoData } from "../types/video";
 
-const backendURL = "http://127.0.0.1:8000";
+const backendURL = "http://127.0.0.1:8000"; // !TODO change for config file linked to backend URL
 
 export async function convertVideo(format:string, onConvert:() => void ) {
   const videosArray = await getVideos();

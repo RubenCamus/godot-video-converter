@@ -27,7 +27,9 @@ const App = () => {
     selectedInputVideos.push(name);
     console.log("new selected input is", selectedInputVideos);
   }
-
+  function changeSelected(selected: boolean) {
+    return !selected;
+  }
   async function getSelectedVideos() {
     const response = await getVideos();
     const videos = response.videos;
