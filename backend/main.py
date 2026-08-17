@@ -70,6 +70,16 @@ async def generate_uuid(video_name):
     new_data_json = json.dumps(data_py) # json dumps converts python object to json format
     metadata_path.write_text(new_data_json)
 
+def get_uuid(video_name):
+    metadata_path = Path('./input/metadata.json')
+    if not metadata_path.exists():
+        return "ERROR: metadata file does not exists"
+    data = metadata_path.read_text()
+    # for video in data:
+        # if video
+
+
+
 def delete_video(file):
     file.unlink()
 

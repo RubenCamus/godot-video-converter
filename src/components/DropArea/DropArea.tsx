@@ -52,10 +52,11 @@ export default function DropArea({ onUpload }: { onUpload: () => void }) {
       formData.append("file", file); // carries video data and is the correct format for API req
       try {
         const response = await uploadAPI("http://127.0.0.1:8000/upload", formData);
-        onUpload(); // callback function to upload UI
         } catch (e) {
             console.log(e);
-        }
+      }
+      fileList = [];
+      onUpload(); // callback function to upload UI
     })
   }
   async function uploadAPI(url: string, formData: FormData) {
