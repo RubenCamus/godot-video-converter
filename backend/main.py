@@ -5,9 +5,9 @@ from uuid import uuid4
 from fastapi import FastAPI, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
-from godot_video_converter import convertFile
 from pydantic import BaseModel
 
+from godot_video_converter import convertFile  # pyright: ignore[reportImplicitRelativeImport]
 origins = [
     "*"
 ]
@@ -62,7 +62,8 @@ async def generate_uuid(video_name):
     x_uuid = uuid4() # create random uuid for the video
     uuid = str(x_uuid) # Convert uuid to string. IF NOT JSON BREAKS
     video_json = {
-        video_name: uuid
+        "uuid": uuid,
+        "name": video_name
     }
     data_json = metadata_path.read_text()
     data_py = json.loads(data_json) # json loads converts from json format to python object
@@ -70,14 +71,19 @@ async def generate_uuid(video_name):
     new_data_json = json.dumps(data_py) # json dumps converts python object to json format
     metadata_path.write_text(new_data_json)
 
-def get_uuid(video_name):
+async def get_uuid(video_name):
     metadata_path = Path('./input/metadata.json')
     if not metadata_path.exists():
         return "ERROR: metadata file does not exists"
-    data = metadata_path.read_text()
-    # for video in data:
-        # if video
-
+    data = json.loads(metadata_path.read_text())
+    for video in data: # -> video is a dict
+        print(video)
+        print(video["name"])
+        if video["name"] == video_name:
+            print("video uuid is: ", video["uuid"])
+            return video["uuid"]
+    print("error video not found")
+    return "ERROR: video not found"
 
 
 def delete_video(file):
@@ -113,17 +119,19 @@ async def upload_controller(file: UploadFile):
     )
 @app.get('/videos')
 async def get_videos():
-    videoList = []
+    video_list = []
     input_folder = Path('./input')
     for x in input_folder.iterdir():
         if x.is_file() and suffix_formats.count(x.suffix) > 0:
+            uuid = await get_uuid(x.name)
             videoObject = {
                 "filename": x.name,
-                "format": x.suffix
+                "format": x.suffix,
+                "uuid": uuid
             }
-            videoList.append(videoObject)
+            video_list.append(videoObject)
     return {
-        "videos": videoList
+        "videos": video_list
     }
 @app.get('/output')
 async def get_output():
