@@ -14,6 +14,10 @@ origins = [
 
 INPUT_DIR = Path("input")
 OUTPUT_DIR = Path("output")
+
+class GeneralResponse(BaseModel):
+    success: bool
+    message: str
 class UploadData(BaseModel):
     filename: str | None
     size: int | None
@@ -120,8 +124,11 @@ app.get('/videos/{video_name}')
 async def return_uuid(video_name):
     uuid = get_uuid(video_name)
     if uuid != None:
-        return uuid
-    return {"error": "ERROR: VIDEO NAME NOT FOUND. COULD NOT RETRIEVE UUID"}
+        return {"data": uuid}
+    return GeneralResponse(
+        success = False,
+        message = "ERROR: Video name not found. Could not retrieve UUID "
+    )
 @app.get('/videos')
 async def get_videos():
     video_list = []
@@ -173,7 +180,9 @@ async def convert_file(filename: str):
     output_file = output_path.read_bytes()
     if output_file == 0:
         raise HTTPException(500, "Converted file is empty")
-    return {"message: Succesfully converted the video"}
+    return GeneralResponse(
+        success = True,
+        message = "Succesfully converted video")
 
 @app.post("/convert")
 async def convert_video(file: UploadFile):
@@ -191,4 +200,6 @@ async def convert_video(file: UploadFile):
     output_file = output_path.read_bytes()
     if output_file == 0:
         raise HTTPException(500, "Converted file is empty")
-    return {"message": "Succesfully converted the video"}
+    return GeneralResponse(
+        success = True,
+        message = "Succesfully converted video")
