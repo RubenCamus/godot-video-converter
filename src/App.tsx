@@ -16,7 +16,7 @@ import SelectOption from './components/SelectOption/SelectOption';
 // Change with API fetch
 const App = () => {
   const selectedInputVideos: Array<string> = [];
-  function addPollas(name: string) {
+  function selectedLogic(name: string) {
     console.log(selectedInputVideos);
     if (selectedInputVideos.includes(name)) {
       const indexToDelete = selectedInputVideos.indexOf(name);
@@ -27,20 +27,6 @@ const App = () => {
     selectedInputVideos.push(name);
     console.log("new selected input is", selectedInputVideos);
   }
-  function changeSelected(selected: boolean) {
-    return !selected;
-  }
-  async function getSelectedVideos() {
-    const response = await getVideos();
-    const videos = response.videos;
-    for (let i = 0; i < videos.length; i++) {
-      const curVideo = videos[i];
-    }
-  }
-    // On click video component change useState
-    // if state is true add to selectedVideos array
-    //
-  const [selected, setSelected] = useState<boolean>();
   const [videos, setVideos] = useState<VideoData[]>([]);
   const [format, setFormat] = useState<string>("ogv");
   async function loadVideos() {
@@ -70,17 +56,17 @@ const App = () => {
       </div>
       <div className='dynamic-videos-wrapper'>
         {videos.map(video => (
-          <VideoComponent key={video.filename} video={video} isSelected={false} parentFunction={() => addPollas(video.filename)} />
+          <VideoComponent key={video.filename} video={video} isSelected={false} parentFunction={() => selectedLogic(video.filename)} />
         ))}
       </div>
       <div>
-        <MainButton onClick={() => convertVideo(format, onConvertFinished)} content='Convert'></MainButton>
+        <MainButton onClick={() => convertVideo(format, onConvertFinished, selectedInputVideos)} content='Convert'></MainButton>
       </div>
       <h2>Converted</h2>
         {/*ADD PROGRESS FOR VIDEO CONVERTING*/}
         <div className='dynamic-videos-wrapper'>
                 {outputVideos.map(video => (
-                  <VideoComponent key={video.filename} video={video} isSelected={false} parentFunction={() => addPollas(video.filename)}/>
+                  <VideoComponent key={video.filename} video={video} isSelected={false} parentFunction={() => selectedLogic(video.filename)}/>
                 ))}
         </div>
       {/*<MainButton onClick={() => downloadVideo} content="Download All"></MainButton>*/}

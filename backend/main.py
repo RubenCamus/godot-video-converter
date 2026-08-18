@@ -14,7 +14,6 @@ origins = [
 
 INPUT_DIR = Path("input")
 OUTPUT_DIR = Path("output")
-
 class UploadData(BaseModel):
     filename: str | None
     size: int | None
@@ -117,6 +116,12 @@ async def upload_controller(file: UploadFile):
         success= True,
         message= "Videos uploaded succesfully",
     )
+app.get('/videos/{video_name}')
+async def return_uuid(video_name):
+    uuid = get_uuid(video_name)
+    if uuid != None:
+        return uuid
+    return {"error": "ERROR: VIDEO NAME NOT FOUND. COULD NOT RETRIEVE UUID"}
 @app.get('/videos')
 async def get_videos():
     video_list = []
