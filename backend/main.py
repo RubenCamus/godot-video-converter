@@ -15,6 +15,9 @@ origins = [
 INPUT_DIR = Path("input")
 OUTPUT_DIR = Path("output")
 
+class VideoData(BaseModel):
+    format: str
+
 class GeneralResponse(BaseModel):
     success: bool
     message: str
@@ -102,7 +105,8 @@ options = {"video_quality": 5, "audio_quality": 5}
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
-    allow_headers=[""]
+    allow_headers=["*"],
+    allow_methods=["*"]
 )
 
 @app.get("/health")
@@ -170,12 +174,13 @@ async def download_video(filename: str):
         media_type="video/ogg"
     )
 @app.post("/convert_file/{filename}")
-async def convert_file(filename: str):
+async def convert_file(filename: str,data: VideoData):
     file_path_obj = Path(filename)
-    file_path = Path(f"./input/{file_path_obj}")
+    file_path = Path(f"./input/{filename}")
     if not Path('output').exists():
         Path('output').mkdir()
-    output_path = Path(f"output/{file_path_obj.stem}.ogv")
+    output_path = Path(f"output/{file_path_obj.stem}.{data.format}")
+    print(output_path)
     convertFile(file_path, options, output_path)
     output_file = output_path.read_bytes()
     if output_file == 0:

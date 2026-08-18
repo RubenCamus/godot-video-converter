@@ -67,7 +67,7 @@ def get_video_files():
 def convertFile(video_file, options, output_path):
     command = f"ffmpeg -i {video_file} -c:v libtheora -q:v {options['video_quality']} -q:a {options['audio_quality']} -g:v 36 {video_file}_theora.ogv"
     output_video = subprocess.run(
-        f"ffmpeg -i {video_file} -c:v libtheora -q:v {options['video_quality']} -q:a {options['audio_quality']} -g:v 36 {output_path}"
+        f"ffmpeg -i {video_file} -q:v {options['video_quality']} -q:a {options['audio_quality']} -g:v 36 {output_path}"
     )
     print("File converted")
     return output_video

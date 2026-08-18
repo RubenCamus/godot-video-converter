@@ -52,7 +52,7 @@ const App = () => {
       <div className='videos-title'>
         <h2>Uploads</h2>
         <span>Format: </span>
-        <SelectOption></SelectOption>
+        <SelectOption updateFormat={(fr) => setFormat(fr)}></SelectOption>
       </div>
       <div className='dynamic-videos-wrapper'>
         {videos.map(video => (
