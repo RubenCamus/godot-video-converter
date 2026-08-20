@@ -16,16 +16,30 @@ import SelectOption from './components/SelectOption/SelectOption';
 // Change with API fetch
 const App = () => {
   const selectedInputVideos: Array<string> = [];
-  function selectedLogic(name: string) {
-    console.log(selectedInputVideos);
-    if (selectedInputVideos.includes(name)) {
-      const indexToDelete = selectedInputVideos.indexOf(name);
-      const removedItem = selectedInputVideos.splice(indexToDelete, 1);
-      console.log("Removed Item: ", removedItem);
-      return;
+  const selectedOutputVideos: Array<string> = [];
+  function selectedLogic(name: string, array: string) {
+    if (array == "input") {
+      console.log("INPUT VIDEOS", selectedInputVideos);
+      if (selectedInputVideos.includes(name)) {
+        const indexToDelete = selectedInputVideos.indexOf(name);
+        selectedInputVideos.splice(indexToDelete, 1);
+        console.log("INPUT VIDEOS", selectedInputVideos);
+        return;
+      }
+      selectedInputVideos.push(name);
+      console.log(selectedInputVideos);
     }
-    selectedInputVideos.push(name);
-    console.log("new selected input is", selectedInputVideos);
+    if (array == "output") {
+      console.log("OUTPUT VIDEOS", selectedOutputVideos);
+      if (selectedOutputVideos.includes(name)) {
+        const indexToDelete = selectedOutputVideos.indexOf(name);
+        selectedOutputVideos.splice(indexToDelete, 1);
+        console.log("OUTPUT VIDEOS", selectedOutputVideos);
+        return;
+      }
+      selectedOutputVideos.push(name);
+      console.log(selectedOutputVideos);
+      }
   }
   const [videos, setVideos] = useState<VideoData[]>([]);
   const [outputVideos, setOutputVideos] = useState<VideoData[]>([]);
@@ -71,7 +85,7 @@ const App = () => {
         {
           // Input Video components TODO => Refactor into reusable logic and cleaner
           videos.map(video => (
-          <VideoComponent key={video.filename} video={video} isSelected={false} parentFunction={() => selectedLogic(video.filename)} />
+          <VideoComponent key={video.filename} video={video} isSelected={false} parentFunction={() => selectedLogic(video.filename, "input")} />
         ))}
       </div>
       <div>
@@ -81,7 +95,7 @@ const App = () => {
         {/*ADD PROGRESS FOR VIDEO CONVERTING*/}
         <div className='dynamic-videos-wrapper'>
                 {outputVideos.map(video => (
-                  <VideoComponent key={video.filename} video={video} isSelected={false} parentFunction={() => selectedLogic(video.filename)}/>
+                  <VideoComponent key={video.filename} video={video} isSelected={false} parentFunction={() => selectedLogic(video.filename, "output")}/>
                 ))}
         </div>
       {/*<MainButton onClick={() => downloadVideo} content="Download All"></MainButton>*/}
