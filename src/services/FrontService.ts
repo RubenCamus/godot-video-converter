@@ -25,6 +25,9 @@ export async function downloadVideo(video_name: string) {
 export async function getVideos() {
   const videos = await fetch(`${backendURL}/videos`); // Returns {videos} containing an array of videos in  objects from input folder.
   const response = await videos.json();
+  if (response == null || response == "") {
+    return "Error: No videos found on fetch."
+  }
   return response;
 }
 export async function getOutputVideos() {

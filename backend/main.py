@@ -136,6 +136,10 @@ async def return_uuid(video_name):
 @app.get('/videos')
 async def get_videos():
     video_list = []
+    if not Path('./input').exists():
+        return GeneralResponse(
+            success=False,
+            message="Error: Input folder is empty or does not exist")
     input_folder = Path('./input')
     for x in input_folder.iterdir():
         if x.is_file() and suffix_formats.count(x.suffix) > 0:

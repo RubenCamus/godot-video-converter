@@ -28,22 +28,35 @@ const App = () => {
     console.log("new selected input is", selectedInputVideos);
   }
   const [videos, setVideos] = useState<VideoData[]>([]);
+  const [outputVideos, setOutputVideos] = useState<VideoData[]>([]);
   const [format, setFormat] = useState<string>("ogv");
   async function loadVideos() {
     const response = await getVideos();
+    if (response.success == false ) {
+      setVideos([]);
+      return "Error: No videos found on fetch."
+    }
     setVideos(response.videos);
   }
   async function loadOutputVideos() {
         const response = await getOutputVideos();
         setOutputVideos(response.videos);
   }
-  const [outputVideos, setOutputVideos] = useState<VideoData[]>([]);
   async function onUploadFinished() {
     await loadVideos();
   }
   async function onConvertFinished() {
     await loadOutputVideos();
   }
+  // Load videos on start and refresh
+  useEffect(() => {
+    loadVideos();
+    loadOutputVideos();
+    return () => {
+      setVideos([]);
+      setOutputVideos([]);
+    }
+  },[setVideos, setOutputVideos])
   return (
     <>
       <DropArea onUpload={onUploadFinished}></DropArea>
@@ -55,7 +68,9 @@ const App = () => {
         <SelectOption updateFormat={(fr) => setFormat(fr)}></SelectOption>
       </div>
       <div className='dynamic-videos-wrapper'>
-        {videos.map(video => (
+        {
+          // Input Video components TODO => Refactor into reusable logic and cleaner
+          videos.map(video => (
           <VideoComponent key={video.filename} video={video} isSelected={false} parentFunction={() => selectedLogic(video.filename)} />
         ))}
       </div>
