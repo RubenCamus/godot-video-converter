@@ -2,8 +2,9 @@ import { useState } from "react";
 import MainButton from "../MainButton/MainButton"
 import styles from './DropArea.module.css';
 import { maxFileSize } from '../../config';
-var fileList: File[] = [];
+var fl : File[] = [];
 export default function DropArea({ onUpload }: { onUpload: () => void }) {
+  const [fileList, setFileList] = useState<File[]>([]);
   const [isDragging, setIsDragging] = useState(false);
   function handleDragLeave(event: React.DragEvent<HTMLDivElement>) {
     event.preventDefault();
@@ -38,12 +39,14 @@ export default function DropArea({ onUpload }: { onUpload: () => void }) {
       const fileSize = file.size;
       const fileSizeMegabytes = (fileSize / 1024) / 1024;
       if (fileSizeMegabytes > maxFileSize) {
-        console.log("File is too big for upload");
+        alert(`File: ${file.name} exceeds maximum file size`);
         files.splice(files.indexOf(file), 1);
       }
     });
     console.log("files are: ", files, "fileList is: ", fileList);
-    fileList.push(...files);
+    const newfl = fileList;
+    fl.push(...files);
+    setFileList(fl);
     console.log(fileList);
   }
   async function uploadVideos() {
@@ -55,7 +58,7 @@ export default function DropArea({ onUpload }: { onUpload: () => void }) {
         } catch (e) {
             console.log(e);
       }
-      fileList = [];
+      setFileList([]);
       onUpload(); // callback function to upload UI
     })
   }
@@ -75,6 +78,19 @@ export default function DropArea({ onUpload }: { onUpload: () => void }) {
           <span>Drag your videos here</span>
           <span>or select from your device</span>
           <label htmlFor="selectedFile" className={styles.selectedFile}>Select your file</label>
+          <div>
+            <p>Loaded videos</p>
+            {
+              fileList.map(video => (
+                <div key={video.name}>
+                  <p>{video.name}</p>
+                  <p>{video.size}</p>
+                </div>
+              )
+
+              )
+            }
+          </div>
           <input className={styles.fileInput} id="selectedFile" type="file" accept="video/*" multiple onChange={handleInput} />
           <span id={styles.formatsText}>{"Accepted file formats - " + "maxFileSize"}</span>
           <MainButton  content="Upload videos" onClick={uploadVideos}></MainButton>

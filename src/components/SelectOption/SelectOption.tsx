@@ -1,15 +1,17 @@
 import { useRef, useState } from 'react';
 import styles from './SelectOption.module.css';
 
-
 export default function SelectOption({ updateFormat }: { updateFormat: (format: string) => void }) {
 // Call back function tu update parent (App.tsx) format state
+const [fm, setfm] = useState<string>("ogv");
   function returnFormat(value: string) {
-    updateFormat(value)
+    console.log(value);
+    setfm(value);
+    updateFormat(value);
   }
   return (
     <div className={styles.selectWrapper}>
-      <select className={styles.select} name="format" id="format" value={"ogv"} onChange={e => returnFormat(e.target.value)}>
+      <select className={styles.select} name="format" id="format" value={fm} onChange={e => returnFormat(e.target.value)}>
         <option value="ogv">OGV</option>
         <option value="mp4">MP4</option>
         <option value="mkv">MKV</option>

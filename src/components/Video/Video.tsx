@@ -5,7 +5,6 @@ import MainButton from '../MainButton/MainButton';
 import { useState } from 'react';
 interface VideoComponentProps {
   video: VideoData
-  isSelected: boolean
   parentFunction: () => void
 }
 export default function VideoComponent({ video,parentFunction }: VideoComponentProps) {

@@ -4,6 +4,7 @@
     background-color: var(--color-primary);
     color: white;
     width: 10em ;
+    height: 2em;
     font-size: 1em;
     box-shadow: 1px 1px  ;
     transition: background-color 200ms;

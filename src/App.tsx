@@ -92,7 +92,7 @@ const App = () => {
         <MainButton onClick={() => convertVideo(format, onConvertFinished, selectedInputVideos)} content='Convert'></MainButton>
       </div>
       <h2>Converted</h2>
-        {/*ADD PROGRESS FOR VIDEO CONVERTING*/}
+        {/*TODO ADD PROGRESS FOR VIDEO CONVERTING*/}
         <div className='dynamic-videos-wrapper'>
                 {outputVideos.map(video => (
                   <VideoComponent key={video.filename} video={video}  parentFunction={() => selectedLogic(video.filename, "output")}/>
