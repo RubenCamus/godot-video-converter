@@ -85,7 +85,7 @@ const App = () => {
         {
           // Input Video components TODO => Refactor into reusable logic and cleaner
           videos.map(video => (
-          <VideoComponent key={video.filename} video={video} isSelected={false} parentFunction={() => selectedLogic(video.filename, "input")} />
+          <VideoComponent key={video.filename} video={video}  parentFunction={() => selectedLogic(video.filename, "input")} />
         ))}
       </div>
       <div>
@@ -95,7 +95,7 @@ const App = () => {
         {/*ADD PROGRESS FOR VIDEO CONVERTING*/}
         <div className='dynamic-videos-wrapper'>
                 {outputVideos.map(video => (
-                  <VideoComponent key={video.filename} video={video} isSelected={false} parentFunction={() => selectedLogic(video.filename, "output")}/>
+                  <VideoComponent key={video.filename} video={video}  parentFunction={() => selectedLogic(video.filename, "output")}/>
                 ))}
         </div>
       {/*<MainButton onClick={() => downloadVideo} content="Download All"></MainButton>*/}

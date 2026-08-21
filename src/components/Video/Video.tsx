@@ -8,10 +8,14 @@ interface VideoComponentProps {
   isSelected: boolean
   parentFunction: () => void
 }
-export default function VideoComponent({ video, isSelected, parentFunction}: VideoComponentProps) {
-
+export default function VideoComponent({ video,parentFunction }: VideoComponentProps) {
+  const [isSelected, setSelected] = useState<boolean>(false);
+  function selectedLogic() {
+    setSelected(!isSelected);
+    parentFunction();
+  }
   return (
-    <div id='wrap' onClick={() => parentFunction()} className={`${styles.videoWrapper}, ${isSelected ? styles.videoSelected : styles.videoWrapper}`}>
+    <div id='wrap' onClick={() => selectedLogic()} className={`${styles.videoWrapper}, ${isSelected ? styles.videoSelected : styles.videoWrapper}`}>
       <div className={styles.videoImageWrapper}>
         <img src="/src/public/video-icon-white.svg" alt="placeholder image" className={styles.videoImage} />
       </div>
