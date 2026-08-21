@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MainButton from "../MainButton/MainButton"
 import styles from './DropArea.module.css';
 import { maxFileSize } from '../../config';
-var fl : File[] = [];
+import FileVideo from "../FileVideo/FileVideo";
 export default function DropArea({ onUpload }: { onUpload: () => void }) {
   const [fileList, setFileList] = useState<File[]>([]);
   const [isDragging, setIsDragging] = useState(false);
@@ -29,25 +29,46 @@ export default function DropArea({ onUpload }: { onUpload: () => void }) {
 
     if (!files) return;
 
-    console.log(files);
     handleFiles(Array.from(files));
+  }
+  function checkDuplicateFiles(file: File) {
+    for (const fl of fileList) {
+      if (fl.name == file.name) {
+        return true;
+      }
+    }
   }
   function handleFiles(files: File[]) {
     if (files.length == 0) { return "File list is empty"; }
     // Loop through added files
-    files.forEach(file => {
+    const newfl= [...fileList];
+    for (const file of files) {
       const fileSize = file.size;
       const fileSizeMegabytes = (fileSize / 1024) / 1024;
       if (fileSizeMegabytes > maxFileSize) {
         alert(`File: ${file.name} exceeds maximum file size`);
         files.splice(files.indexOf(file), 1);
+        continue;
       }
-    });
-    console.log("files are: ", files, "fileList is: ", fileList);
-    const newfl = fileList;
-    fl.push(...files);
-    setFileList(fl);
-    console.log(fileList);
+      var isDuplicate = checkDuplicateFiles(file);
+      if (isDuplicate == true) {
+        files.splice(files.indexOf(file), 1);
+        continue;
+      }
+      newfl.push(file);
+      setFileList(newfl);
+      console.log("updated fileList is: ", fileList);
+    };
+  }
+  function removeFile(filename: string) {
+    const newfl = [...fileList];
+    newfl.forEach(file => {
+      if (file.name == filename) {
+        const indexToDelete = newfl.indexOf(file);
+        newfl.splice(indexToDelete, 1);
+        setFileList(newfl);
+      }
+    })
   }
   async function uploadVideos() {
     fileList.forEach(async (file) => {
@@ -78,21 +99,17 @@ export default function DropArea({ onUpload }: { onUpload: () => void }) {
           <span>Drag your videos here</span>
           <span>or select from your device</span>
           <label htmlFor="selectedFile" className={styles.selectedFile}>Select your file</label>
-          <div>
-            <p>Loaded videos</p>
+          <p style={{color: "var(--color-primary)"}}>Loaded videos</p>
+          <div className={styles.fileVideos}>
             {
               fileList.map(video => (
-                <div key={video.name}>
-                  <p>{video.name}</p>
-                  <p>{video.size}</p>
-                </div>
-              )
 
-              )
+                <FileVideo key={video.name} videoData={video} removeFn={() => removeFile(video.name)}></FileVideo>
+              ))
             }
           </div>
           <input className={styles.fileInput} id="selectedFile" type="file" accept="video/*" multiple onChange={handleInput} />
-          <span id={styles.formatsText}>{"Accepted file formats - " + "maxFileSize"}</span>
+          <p className={styles.formatsText}>Maximum file size {maxFileSize} MB</p>
           <MainButton  content="Upload videos" onClick={uploadVideos}></MainButton>
         </div>
       </div>

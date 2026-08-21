@@ -69,3 +69,9 @@
 .dragOverlay {
     background-color: rgba(0, 0, 0, 0.5);
 }
+.formatsText {
+    color: var(--color-secondary);
+}
+.fileVideos {
+    display: flex;
+}
