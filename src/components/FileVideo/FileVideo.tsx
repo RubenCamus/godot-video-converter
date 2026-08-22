@@ -1,12 +1,12 @@
-import styles from "./FileVideo.module.css"
-
+import styles from "./FileVideo.module.css";
+import cross from '../../assets/close-circle.svg';
 export default function FileVideo({ videoData, removeFn }: { videoData: File, removeFn: () => void }) {
 
 
 
   return (
     <div className={styles.wrapper}>
-      <img className={styles.crossImage} onClick={() => removeFn()} src="/placeholder.svg" alt="Close cross" />
+      <img className={styles.crossImage} onClick={() => removeFn()} src={cross} alt="Close cross" />
       <p>
         {videoData.name != "" ? videoData.name : "Placeholder name"}
       </p>
