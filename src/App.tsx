@@ -10,24 +10,41 @@ import { useEffect, useState } from 'react';
 // Import Styles
 import './index.css'
 import './variables.css'
-import { shell } from 'electron/common';
 import Footer from './components/Footer/Footer';
 import SelectOption from './components/SelectOption/SelectOption';
 // Change with API fetch
 const App = () => {
-  const selectedInputVideos: Array<string> = [];
+  // const selectedInputVideos: Array<string> = [];
+  const [selectedInputVideos, setSelectedInputVideos] = useState<Array<string>>([]);
   const selectedOutputVideos: Array<string> = [];
   function selectedLogic(name: string, array: string) {
     if (array == "input") {
-      console.log("INPUT VIDEOS", selectedInputVideos);
+      console.log("selectedVIdeos: ", selectedInputVideos);
       if (selectedInputVideos.includes(name)) {
         const indexToDelete = selectedInputVideos.indexOf(name);
-        selectedInputVideos.splice(indexToDelete, 1);
-        console.log("INPUT VIDEOS", selectedInputVideos);
+        let newArray = selectedInputVideos;
+        newArray.splice(indexToDelete, 1);
+        setSelectedInputVideos(newArray);
+        console.log("new array is: ", newArray);
+        if (selectedInputVideos.length === 0) {
+          setCanConvert(false);
+        } else {
+          console.log("can convert is false");
+          setCanConvert(true);
+        }
         return;
+      } else {
+        console.log("AAAA");
+        const newArray = [...selectedInputVideos, name];
+        setSelectedInputVideos(prevVideos => { return [...prevVideos, name] });
+        if (selectedInputVideos.length === 0) {
+          setCanConvert(false);
+        } else {
+          setCanConvert(true);
+        }
+
+        console.log("new array ias: ", newArray);
       }
-      selectedInputVideos.push(name);
-      console.log(selectedInputVideos);
     }
     if (array == "output") {
       console.log("OUTPUT VIDEOS", selectedOutputVideos);
@@ -39,11 +56,12 @@ const App = () => {
       }
       selectedOutputVideos.push(name);
       console.log(selectedOutputVideos);
-      }
+    }
   }
   const [videos, setVideos] = useState<VideoData[]>([]);
   const [outputVideos, setOutputVideos] = useState<VideoData[]>([]);
   const [format, setFormat] = useState<string>("ogv");
+  const [canConvert, setCanConvert] = useState<boolean>(false);
   async function loadVideos() {
     const response = await getVideos();
     if (response.success == false ) {
@@ -89,7 +107,7 @@ const App = () => {
         ))}
       </div>
       <div>
-        <MainButton onClick={() => convertVideo(format, onConvertFinished, selectedInputVideos)} content='Convert'></MainButton>
+        <MainButton onClick={() => convertVideo(format, onConvertFinished, selectedInputVideos)} canConvert={canConvert} content='Convert'></MainButton>
       </div>
       <h2>Converted</h2>
         {/*TODO ADD PROGRESS FOR VIDEO CONVERTING*/}
