@@ -34,7 +34,6 @@ const App = () => {
         }
         return;
       } else {
-        console.log("AAAA");
         const newArray = [...selectedInputVideos, name];
         setSelectedInputVideos(prevVideos => { return [...prevVideos, name] });
         if (selectedInputVideos.length === 0) {
@@ -71,8 +70,11 @@ const App = () => {
     setVideos(response.videos);
   }
   async function loadOutputVideos() {
-        const response = await getOutputVideos();
-        setOutputVideos(response.videos);
+    const response = await getOutputVideos();
+    if (response.success == false) {
+      return "Error: No videos found on fetch"
+    }
+    setOutputVideos(response.videos);
   }
   async function onUploadFinished() {
     await loadVideos();

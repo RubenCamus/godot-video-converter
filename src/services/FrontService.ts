@@ -13,9 +13,9 @@ export async function convertVideo(format: string, onConvert: () => void, select
       },
       body: JSON.stringify({ format: format }),
     })
+    onConvert();
   })
   // TODO ADD TEST IF VIDEOS WERE CONVERTED THEN CALLBACK FUNCTION
-    onConvert();
 }
 export async function downloadVideo(video_name: string) {
   const response = await fetch(`${backendURL}/download/${video_name}`); // Returns a file
@@ -33,5 +33,6 @@ export async function getVideos() {
 export async function getOutputVideos() {
   const videos = await fetch(`${backendURL}/output`); // Returns {videos} containing an array of videos in  objects from input folder.
   const response = await videos.json();
+  if (response == null || response == ""){return "Error: No output videos found on fetch"}
   return response;
 }
