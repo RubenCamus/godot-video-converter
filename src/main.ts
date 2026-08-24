@@ -40,6 +40,14 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   initBackend();
+  // This handles opening OS browser for external links.
+  ipcMain.handle('open-link', async (_event, url: string) => {
+      shell.openExternal(url);
+    })
+  // Handles opening where output videos folder are stored
+  ipcMain.handle("open-output-folder", async () => {
+    return await shell.openPath('C:/Users/Ruben/Desktop/dev/godot-toolkit/backend/output');
+  })
   createWindow();
 });
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -96,6 +104,3 @@ function deleteInput() {
     recursive: true,
   })
 }
-ipcMain.handle("open-output-folder", async () => {
-  return await shell.openPath('C:/Users/Ruben/Desktop/dev/godot-toolkit/backend/output');
-})
