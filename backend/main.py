@@ -157,9 +157,10 @@ async def get_videos():
 async def get_output():
     videoList = []
     if not Path('./output').exists():
-        return GeneralResponse(
-            success = False,
-            message = "Error: Output folder does not exist")
+        Path('./output').mkdir()
+        # return GeneralResponse(
+        #     success = False,
+        #     message = "Error: Output folder does not exist")
     input_folder = Path('./output')
     for x in input_folder.iterdir():
         if x.is_file():
