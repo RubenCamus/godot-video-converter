@@ -108,10 +108,16 @@ const App = () => {
         ))}
       </div>
       <div>
-        <MainButton onClick={() => convertVideo(format, onConvertFinished, selectedInputVideos)} isClickable={canConvert} content='Convert'></MainButton>
+        {/* CONVERT BUTTON */}
+        {canConvert ? (
+          <MainButton onClick={() => convertVideo(format, onConvertFinished, selectedInputVideos)} isClickable={canConvert} content='Convert'></MainButton>
+        ) :
+        <MainButton onClick={() => alert("Select videos to convert first")} isClickable={canConvert} content='Convert'></MainButton>
+        }
+        {/*<MainButton onClick={() => convertVideo(format, onConvertFinished, selectedInputVideos)} isClickable={canConvert} content='Convert'></MainButton>*/}
       </div>
       <h2>Converted</h2>
-        {/*TODO ADD PROGRESS FOR VIDEO CONVERTING*/}
+        {/* TODO ADD PROGRESS FOR VIDEO CONVERTING*/}
         <div className='dynamic-videos-wrapper'>
                 {outputVideos.map(video => (
                   <VideoComponent key={video.filename} video={video}  parentFunction={() => selectedLogic(video.filename, "output")}/>

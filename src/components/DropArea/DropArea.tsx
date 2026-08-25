@@ -115,7 +115,11 @@ export default function DropArea({ onUpload }: { onUpload: () => void }) {
           </div>
           <input className={styles.fileInput} id="selectedFile" type="file" accept="video/*" multiple onChange={handleInput} />
           <p className={styles.formatsText}>Maximum file size {maxFileSize} MB</p>
-          <MainButton content={"Upload videos"} isClickable={canUpload} onClick={uploadVideos} ></MainButton>
+          {canUpload ?
+            <MainButton content={"Upload videos"} isClickable={canUpload} onClick={uploadVideos} ></MainButton> :
+            <MainButton content={"Drop videos"} isClickable={canUpload} onClick={() => alert("Add videos before upload")} ></MainButton>
+          }
+          {/*<MainButton content={"Upload videos"} isClickable={canUpload} onClick={uploadVideos} ></MainButton>*/}
         </div>
       </div>
     </div>
