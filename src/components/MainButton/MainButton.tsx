@@ -2,10 +2,10 @@ import { MouseEventHandler, useRef } from 'react';
 import styles from './MainButton.module.css';
 
 
-export default function MainButton({ content, onClick, canConvert }: { content: string, onClick?: () => void, canConvert?: boolean }) {
+export default function MainButton({ content, onClick, isClickable }: { content: string, onClick?: () => void, isClickable?: boolean }) {
   const buttonRef = useRef(null);
   function changeStyle() {
-    if (!canConvert) {
+    if (!isClickable) {
        // get button
       buttonRef.current.classList.add('disabled');
        // change button style
@@ -14,6 +14,6 @@ export default function MainButton({ content, onClick, canConvert }: { content: 
     }
   }
   return (
-    <button onClick={onClick} className={styles.mainButton} ref={buttonRef}>{ content }</button>
+    <button onClick={onClick} className={isClickable ? styles.mainButton : styles.disabled} ref={buttonRef}>{ content }</button>
   )
 }

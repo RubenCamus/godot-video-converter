@@ -26,17 +26,16 @@ const App = () => {
         newArray.splice(indexToDelete, 1);
         setSelectedInputVideos(newArray);
         console.log("new array is: ", newArray);
-        if (selectedInputVideos.length === 0) {
+        if (newArray.length === 0) {
           setCanConvert(false);
         } else {
-          console.log("can convert is false");
           setCanConvert(true);
         }
         return;
       } else {
         const newArray = [...selectedInputVideos, name];
         setSelectedInputVideos(prevVideos => { return [...prevVideos, name] });
-        if (selectedInputVideos.length === 0) {
+        if (newArray.length === 0) {
           setCanConvert(false);
         } else {
           setCanConvert(true);
@@ -109,7 +108,7 @@ const App = () => {
         ))}
       </div>
       <div>
-        <MainButton onClick={() => convertVideo(format, onConvertFinished, selectedInputVideos)} canConvert={canConvert} content='Convert'></MainButton>
+        <MainButton onClick={() => convertVideo(format, onConvertFinished, selectedInputVideos)} isClickable={canConvert} content='Convert'></MainButton>
       </div>
       <h2>Converted</h2>
         {/*TODO ADD PROGRESS FOR VIDEO CONVERTING*/}
@@ -119,7 +118,7 @@ const App = () => {
                 ))}
         </div>
       {/*<MainButton onClick={() => downloadVideo} content="Download All"></MainButton>*/}
-      <MainButton onClick={() => window.api.openOutputFolder()} content='open folder'></MainButton>
+      <MainButton onClick={() => window.api.openOutputFolder()} content='open folder' isClickable={true}></MainButton>
       <Footer></Footer>
     </>
   )

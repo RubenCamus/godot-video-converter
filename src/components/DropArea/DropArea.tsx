@@ -5,6 +5,7 @@ import { maxFileSize } from '../../config';
 import FileVideo from "../FileVideo/FileVideo";
 export default function DropArea({ onUpload }: { onUpload: () => void }) {
   const [fileList, setFileList] = useState<File[]>([]);
+  const [canUpload, setCanUpload] = useState<boolean>(false);
   const [isDragging, setIsDragging] = useState(false);
   function handleDragLeave(event: React.DragEvent<HTMLDivElement>) {
     event.preventDefault();
@@ -57,8 +58,10 @@ export default function DropArea({ onUpload }: { onUpload: () => void }) {
       }
       newfl.push(file);
       setFileList(newfl);
-      console.log("updated fileList is: ", fileList);
     };
+    if (newfl.length != 0) {
+      setCanUpload(true);
+    } else { setCanUpload(false); }
   }
   function removeFile(filename: string) {
     const newfl = [...fileList];
@@ -69,6 +72,7 @@ export default function DropArea({ onUpload }: { onUpload: () => void }) {
         setFileList(newfl);
       }
     })
+
   }
   async function uploadVideos() {
     fileList.forEach(async (file) => {
@@ -80,6 +84,7 @@ export default function DropArea({ onUpload }: { onUpload: () => void }) {
             console.log(e);
       }
       setFileList([]);
+      setCanUpload(false);
       onUpload(); // callback function to upload UI
     })
   }
@@ -110,7 +115,7 @@ export default function DropArea({ onUpload }: { onUpload: () => void }) {
           </div>
           <input className={styles.fileInput} id="selectedFile" type="file" accept="video/*" multiple onChange={handleInput} />
           <p className={styles.formatsText}>Maximum file size {maxFileSize} MB</p>
-          <MainButton  content="Upload videos" onClick={uploadVideos}></MainButton>
+          <MainButton content={"Upload videos"} isClickable={canUpload} onClick={uploadVideos} ></MainButton>
         </div>
       </div>
     </div>
