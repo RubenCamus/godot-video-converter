@@ -76,7 +76,7 @@ app.on("activate", () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
 async function initBackend() {
-  const backendDirectory = path.join(__dirname, "../../backend");
+  const backendDirectory = getBackendPath();
   const pythonExe = path.join(
     backendDirectory,
     ".venv",
@@ -103,4 +103,10 @@ function deleteInput() {
     force: true,
     recursive: true,
   })
+}
+function getBackendPath() {
+  if (app.isPackaged) {
+    return path.join(process.resourcesPath, "backend");
+  }
+  return path.join(__dirname, "../../backend");
 }
