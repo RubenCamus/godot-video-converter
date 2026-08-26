@@ -6,6 +6,7 @@ import { spawn } from "node:child_process";
 import { shell } from "electron/common";
 import { ipcMain } from "electron/main";
 import { rm, rmSync, rmdirSync } from "node:fs";
+import { port } from "./config";
 let backendProcess: any;
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {

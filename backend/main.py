@@ -46,7 +46,8 @@ def is_video_valid(file):
     if file.size == 0:
         raise HTTPException(400, "Empty file")
     if file.content_type not in video_formats:
-        raise HTTPException(400, "Format not supported")
+        print(file.content_type)
+        raise HTTPException(405, "Format not supported")
     if file is None:
         raise HTTPException(400, "No file added")
 
@@ -83,10 +84,7 @@ async def get_uuid(video_name):
         return "ERROR: metadata file does not exists"
     data = json.loads(metadata_path.read_text())
     for video in data: # -> video is a dict
-        print(video)
-        print(video["name"])
         if video["name"] == video_name:
-            print("video uuid is: ", video["uuid"])
             return video["uuid"]
     print("error video not found")
     return "ERROR: video not found"
@@ -97,7 +95,7 @@ def delete_video(file):
 
 
 app = FastAPI()
-video_formats = ["video/mp4", "video/mkv", "video/mov", "video/gif, video/avi"]
+video_formats = ["video/mp4", "video/mkv","video/matroska", "video/mov", "video/gif, video/avi"]
 suffix_formats = [".mp4", ".mkv", ".mov", ".gif", ".avi"]
 options = {"video_quality": 5, "audio_quality": 5}
 
@@ -189,7 +187,6 @@ async def convert_file(filename: str,data: VideoData):
     if not Path('output').exists():
         Path('output').mkdir()
     output_path = Path(f"output/{file_path_obj.stem}.{data.format}")
-    print(output_path)
     convertFile(file_path, options, output_path)
     output_file = output_path.read_bytes()
     if output_file == 0:

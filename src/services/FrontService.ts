@@ -1,6 +1,6 @@
 import { VideoData } from "../types/video";
-
-const backendURL = "http://127.0.0.1:8000"; // !TODO change for config file linked to backend URL
+import {backendURL} from '../config'
+// const backendURL = "http://127.0.0.1:8000"; // !TODO change for config file linked to backend URL
 export async function convertVideo(format: string, onConvert: () => void, selectedVideos: Array<string>) {
   // Gets format from App's Select component.
   // onConvert is a callback function for updating UI when finishes converting the video.
