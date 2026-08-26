@@ -180,19 +180,23 @@ app.add_middleware(
 )
 ```
 
-Most of Frontend logic, fetches
+Most of Frontend logic, fetches are in FrontendService.ts file.
+
+Useful app configuration can be found in config.ts. Here you can change the URL, Port, maximum file size for videos.
 <!-- Roadmap -->
 ## :compass: Roadmap
 
-* [x] Todo 1
-* [ ] Todo 2
-
+* [x] First release
+* [ ] Release for MacOS and Linux
+* [ ] Improve UI, change config inside APP, refactor code.
+* [ ] Audio conversion.
+* [ ] Extract frames, and convert video/images to spritesheet.
 
 <!-- Contributing -->
 ## :wave: Contributing
 
-<a href="https://github.com/Louis3797/awesome-readme-template/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Louis3797/awesome-readme-template" />
+<a href="https://github.com/RubenCamus/godot-video-converter/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=RubenCamus/godot-video-converter" />
 </a>
 
 
@@ -204,40 +208,39 @@ See `contributing.md` for ways to get started.
 <!-- Code of Conduct -->
 ### :scroll: Code of Conduct
 
-Please read the [Code of Conduct](https://github.com/Louis3797/awesome-readme-template/blob/master/CODE_OF_CONDUCT.md)
+Please read the [Code of Conduct](https://github.com/RubenCamus/godot-video-converter/blob/master/CODE_OF_CONDUCT.md)
 
 <!-- FAQ -->
 ## :grey_question: FAQ
 
-- Question 1
+-  Can I contribute to this project?
 
-  + Answer 1
+    + Yes, you are more than welcome to add/request features, fix bugs... all help is welcome.
 
-- Question 2
+- Can I fork or redistribute this project?
 
-  + Answer 2
+    + You can do everything under the MIT License, use, modify, sell, distribute.
 
 
 <!-- License -->
 ## :warning: License
 
-Distributed under the no License. See LICENSE.txt for more information.
+Distributed under the MIT License. See LICENSE.txt for more information.
 
 
 <!-- Contact -->
 ## :handshake: Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Ruben Camus - Discord: riisenx - rubencamus@hotmail.com
 
-Project Link: [https://github.com/Louis3797/awesome-readme-template](https://github.com/Louis3797/awesome-readme-template)
+Project Link: [https://github.com/RubenCamus/godot-video-converter](https://github.com/RubenCamus/godot-video-converter)
 
 
 <!-- Acknowledgments -->
 ## :gem: Acknowledgements
 
-Use this section to mention useful resources and libraries that you have used in your projects.
+Useful resources and libraries that I have used.
 
  - [Shields.io](https://shields.io/)
- - [Awesome README](https://github.com/matiassingers/awesome-readme)
+ - [Awesome README](https://github.com/Louis3793/awesome-readme-template)
  - [Emoji Cheat Sheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md#travel--places)
- - [Readme Template](https://github.com/othneildrew/Best-README-Template)
