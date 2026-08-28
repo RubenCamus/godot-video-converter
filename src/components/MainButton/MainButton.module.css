@@ -23,4 +23,5 @@
     font-size: 1em;
     box-shadow: 1px 1px  ;
     transition: background-color 200ms;
+    cursor: not-allowed;
 }
