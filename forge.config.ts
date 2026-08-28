@@ -12,6 +12,10 @@ const config: ForgeConfig = {
     asar: true,
     extraResource: [
       './backend'
+    ],
+    icon: [
+      './src/assets/logo.ico',
+      './src/assets/logo.icns'
     ]
   },
   rebuildConfig: {},
