@@ -3,6 +3,7 @@ import MainButton from "../MainButton/MainButton"
 import styles from './DropArea.module.css';
 import { maxFileSize } from '../../config';
 import FileVideo from "../FileVideo/FileVideo";
+import cloudUpload from '../../assets/cloud-upload-white.svg'
 export default function DropArea({ onUpload }: { onUpload: () => void }) {
   const [fileList, setFileList] = useState<File[]>([]);
   const [canUpload, setCanUpload] = useState<boolean>(false);
@@ -100,7 +101,7 @@ export default function DropArea({ onUpload }: { onUpload: () => void }) {
     <div className={styles.wrapper}>
       <div id="dragArea" className={isDragging ? styles.dragging : styles.dropArea} onDrop={handleDrop} onDragOver={handleDragOver}  onDragLeave={handleDragLeave}>
         <div className={styles.textWrapper}>
-          <img id={styles.cloudIcon} src="/src/public/cloud-upload-white.svg" alt="cloud upload" />
+          <img id={styles.cloudIcon} src={cloudUpload} alt="cloud upload" />
           <span>Drag your videos here</span>
           <span>or select from your device</span>
           <label htmlFor="selectedFile" className={styles.selectedFile}>Select your file</label>
