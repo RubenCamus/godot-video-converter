@@ -5,7 +5,7 @@ import started from "electron-squirrel-startup";
 import { spawn } from "node:child_process";
 import { shell } from "electron/common";
 import { ipcMain } from "electron/main";
-import { rm, rmSync, rmdirSync } from "node:fs";
+import { rmSync} from "node:fs";
 import { port } from "./config";
 let backendProcess: any;
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -32,8 +32,8 @@ const createWindow = () => {
     );
   }
 
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // Uncomment below for development.
+  // mainWindow.webContents.openDevTools();
 };
 
 // This method will be called when Electron has finished
@@ -63,8 +63,7 @@ app.on("before-quit", () => {
   if (backendProcess) {
     backendProcess.kill();
   }
-  console.log("BORRAR INPUT");
-  deleteInput();
+  deleteInput(); // Delete input folder in backend
 });
 app.on("activate", () => {
   // On OS X it's common to re-create a window in the app when the
