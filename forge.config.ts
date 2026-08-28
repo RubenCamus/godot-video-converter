@@ -13,10 +13,7 @@ const config: ForgeConfig = {
     extraResource: [
       './backend'
     ],
-    icon: [
-      './src/assets/logo.ico',
-      './src/assets/logo.icns'
-    ]
+    icon: './src/assets/logo.ico'
   },
   rebuildConfig: {},
   makers: [
