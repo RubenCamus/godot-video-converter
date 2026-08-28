@@ -1,6 +1,7 @@
 <div align="center">
 
-  <img src="assets/logo.png" alt="logo" width="200" height="auto" />
+  <img src="docs/logo.png" alt="logo" width="200" height="auto" />
+  
   <h1>Godot Video Converter</h1>
   
   <p>
@@ -26,11 +27,11 @@
         <img src="https://img.shields.io/github/license/RubenCamus/godot-video-converter" alt="license" />
     </a>
 <h4>
-    <a href="https://github.com/Louis3797/awesome-readme-template/">View Demo</a>
+    <a href="https://github.com/RubenCamus/godot-video-converter/">View Demo</a>
   <span> · </span>
-    <a href="https://github.com/Louis3797/awesome-readme-template/issues/">Report Bug</a>
+    <a href="https://github.com/RubenCamus/godot-video-converter/issues/">Report Bug</a>
   <span> · </span>
-    <a href="https://github.com/Louis3797/awesome-readme-template/issues/">Request Feature</a>
+    <a href="https://github.com/RubenCamus/godot-video-converter/issues/">Request Feature</a>
 </h4>
 </div>
 
@@ -44,11 +45,9 @@
   * [Tech Stack](#space_invader-tech-stack)
   * [Features](#dart-features)
   * [Color Reference](#art-color-reference)
-  * [Environment Variables](#key-environment-variables)
 - [Getting Started](#toolbox-getting-started)
   * [Prerequisites](#bangbang-prerequisites)
   * [Installation](#gear-installation)
-  * [Running Tests](#test_tube-running-tests)
   * [Run Locally](#running-run-locally)
   * [Deployment](#triangular_flag_on_post-deployment)
 - [Usage](#eyes-usage)
@@ -97,6 +96,7 @@ I am working to add more features and improve the current ones, I would love to 
   </ul>
 </details>
 <!-- Features -->
+
 ### :dart: Features
 
 - Convert video format.
@@ -111,6 +111,7 @@ I am working to add more features and improve the current ones, I would love to 
 | Accent Color | ![#62C9FF](https://via.placeholder.com/10/62C9FF?text=+) #62C9FF |
 | Text Color | ![#FCFCFC](https://via.placeholder.com/10/FCFCFC?text=+) #FCFCFC |
 
+## Getting Started
 <!-- Prerequisites -->
 ### :bangbang: Prerequisites
 Node.js: 25.7.0  or later
@@ -154,8 +155,8 @@ Start the server (Electron+Vite+FastAPI)
 ```
 
 
-<!-- Build -->
-### :triangular_flag_on_post: Build
+<!-- Deployment -->
+### :triangular_flag_on_post: Deployment
 
 To build this project run
 
@@ -166,8 +167,6 @@ To build this project run
 
 <!-- Usage -->
 ## :eyes: Usage
-
-Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources.
 
 FastAPI is located at backend -> main.py | ffmpeg processing is located in godot_video_converter.py
 ```python
@@ -187,7 +186,7 @@ Useful app configuration can be found in config.ts. Here you can change the URL,
 ## :compass: Roadmap
 
 * [x] First release
-* [ ] Release for MacOS and Linux
+* [ ] Release for MacOS and Linux. Choose video & audio quality.
 * [ ] Improve UI, change config inside APP, refactor code.
 * [ ] Audio conversion.
 * [ ] Extract frames, and convert video/images to spritesheet.
