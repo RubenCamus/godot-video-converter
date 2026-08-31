@@ -38,37 +38,37 @@
 <br />
 
 <!-- Table of Contents -->
-# :notebook_with_decorative_cover: Table of Contents
+# Table of Contents
 
-- [About the Project](#star2-about-the-project)
-  * [Screenshots](#camera-screenshots)
-  * [Tech Stack](#space_invader-tech-stack)
-  * [Features](#dart-features)
-  * [Color Reference](#art-color-reference)
-- [Getting Started](#toolbox-getting-started)
-  * [Prerequisites](#bangbang-prerequisites)
-  * [Installation](#gear-installation)
-  * [Run Locally](#running-run-locally)
-  * [Deployment](#triangular_flag_on_post-deployment)
-- [Usage](#eyes-usage)
-- [Roadmap](#compass-roadmap)
-- [Contributing](#wave-contributing)
-  * [Code of Conduct](#scroll-code-of-conduct)
-- [FAQ](#grey_question-faq)
-- [License](#warning-license)
-- [Contact](#handshake-contact)
-- [Acknowledgements](#gem-acknowledgements)
+- [About the Project](#about-the-project)
+  * [Screenshots](#screenshots)
+  * [Tech Stack](#tech-stack)
+  * [Features](#features)
+  * [Color Reference](#color-reference)
+- [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+  * [Run Locally](#run-locally)
+  * [Deployment](#deployment)
+- [Usage](#usage)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+  * [Code of Conduct](#code-of-conduct)
+- [FAQ](#faq)
+- [License](#license)
+- [Contact](#contact)
+- [Acknowledgements](#acknowledgements)
 
   
 
 <!-- About the Project -->
-## :star2: About the Project
+## About the Project
 This project's goal is to make converting video files for your projects easier. It started with issues converting to OGV Theora, which is the only accepted format for [VideoStreamPlayer](https://docs.godotengine.org/en/stable/tutorials/animation/playing_videos.html). The docs help converting to ogv, but it is not very intuitive, and this app makes the process easier + letting convert you to other video formats as *gif mov mkv mp4*.
 
 I am working to add more features and improve the current ones, I would love to hear feedback and collaborate.
 
 <!-- Screenshots -->
-### :camera: Screenshots
+### Screenshots
 
 <div align="center"> 
   <img src="./docs/screenshot-gvc.png" alt="screenshot" />
@@ -76,7 +76,7 @@ I am working to add more features and improve the current ones, I would love to 
 
 
 <!-- TechStack -->
-### :space_invader: Tech Stack
+### Tech Stack
 
 <details>
   <summary>Client</summary>
@@ -97,12 +97,12 @@ I am working to add more features and improve the current ones, I would love to 
 </details>
 <!-- Features -->
 
-### :dart: Features
+### Features
 
 - Convert video format.
 
 <!-- Color Reference -->
-### :art: Color Reference
+### Color Reference
 
 | Color             | Hex                                                                |
 | ----------------- | ------------------------------------------------------------------ |
@@ -113,40 +113,64 @@ I am working to add more features and improve the current ones, I would love to 
 
 ## Getting Started
 <!-- Prerequisites -->
-### :bangbang: Prerequisites
+### Prerequisites
+Recommended Versions:
+
 Node.js: 25.7.0  or later
 
 Python: 3.14.5 or later
 
 ffmpeg 8.1.1 or later
 
+The project currently requires Python and FFmpeg installed and in PATH to run the local backend.
 <!-- Installation -->
-### :gear: Installation
+### Installation
 
 #### Download
 
 Download the latest release for your OS from [Releases](github.com/RubenCamus/godot-video-converter/releases)
    
 <!-- Run Locally -->
-### :running: Run Locally
+### Run from source
 
 Clone the project
 
 ```bash
   git clone https://github.com/RubenCamus/godot-video-converter.git
+  cd godot-video-converter
 ```
-
-Go to the project directory
-
-```bash
-  cd godot-toolkit 
-```
-
 Install dependencies
 
 ```bash
   npm install
 ```
+
+#### Set up the Python backend
+Python must be installed and available in PATH
+
+To verify open your OS terminal and try: python -v
+
+Create a virtual environment
+
+```bash
+  python -m venv backend/.venv
+```
+
+Activate it
+
+```bash
+  .\backend\.venv\Scripts\activate
+```
+
+Install the backend dependencies
+
+```bash
+pip install -r requirements.txt
+```
+#### Install FFmpeg
+FFmpeg must be installed and available in PATH
+
+To verify open your OS terminal and try: ffmpeg -version
 
 Start the server (Electron+Vite+FastAPI)
 
@@ -154,19 +178,18 @@ Start the server (Electron+Vite+FastAPI)
   npm run start
 ```
 
-
 <!-- Deployment -->
-### :triangular_flag_on_post: Deployment
+### Deployment
 
 To build this project run
 
 ```bash
-  npm run package
+  npm run make
 ```
 
 
 <!-- Usage -->
-## :eyes: Usage
+## Usage
 
 FastAPI is located at backend -> main.py | ffmpeg processing is located in godot_video_converter.py
 ```python
@@ -183,7 +206,7 @@ Most of Frontend logic, fetches are in FrontendService.ts file.
 
 Useful app configuration can be found in config.ts. Here you can change the URL, Port, maximum file size for videos.
 <!-- Roadmap -->
-## :compass: Roadmap
+## Roadmap
 
 * [x] First release
 * [ ] Release for MacOS and Linux. Choose video & audio quality.
@@ -192,7 +215,7 @@ Useful app configuration can be found in config.ts. Here you can change the URL,
 * [ ] Extract frames, and convert video/images to spritesheet.
 
 <!-- Contributing -->
-## :wave: Contributing
+## Contributing
 
 <a href="https://github.com/RubenCamus/godot-video-converter/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=RubenCamus/godot-video-converter" />
@@ -205,12 +228,12 @@ See `contributing.md` for ways to get started.
 
 
 <!-- Code of Conduct -->
-### :scroll: Code of Conduct
+### Code of Conduct
 
 Please read the [Code of Conduct](https://github.com/RubenCamus/godot-video-converter/blob/master/CODE_OF_CONDUCT.md)
 
 <!-- FAQ -->
-## :grey_question: FAQ
+## FAQ
 
 -  Can I contribute to this project?
 
@@ -222,13 +245,13 @@ Please read the [Code of Conduct](https://github.com/RubenCamus/godot-video-conv
 
 
 <!-- License -->
-## :warning: License
+## License
 
 Distributed under the MIT License. See LICENSE.txt for more information.
 
 
 <!-- Contact -->
-## :handshake: Contact
+## Contact
 
 Ruben Camus - Discord: riisenx - rubencamus@hotmail.com
 
@@ -236,7 +259,7 @@ Project Link: [https://github.com/RubenCamus/godot-video-converter](https://gith
 
 
 <!-- Acknowledgments -->
-## :gem: Acknowledgements
+## Acknowledgements
 
 Useful resources and libraries that I have used.
 
