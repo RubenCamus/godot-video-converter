@@ -2,6 +2,7 @@
 /backend/input
 /backend/output
 /backend/__pycache__
+/backend/.venv
 # Logs
 logs
 *.log

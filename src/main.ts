@@ -1,10 +1,8 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, shell, ipcMain } from "electron";
 import path from "node:path";
 import started from "electron-squirrel-startup";
 
 import { spawn } from "node:child_process";
-import { shell } from "electron/common";
-import { ipcMain } from "electron/main";
 import { rmSync} from "node:fs";
 import { port } from "./config";
 let backendProcess: any;
@@ -47,7 +45,8 @@ app.whenReady().then(() => {
     })
   // Handles opening where output videos folder are stored
   ipcMain.handle("open-output-folder", async () => {
-    return await shell.openPath('C:/Users/Ruben/Desktop/dev/godot-toolkit/backend/output');
+    const outputFolderPath = path.join(getBackendPath(), 'output');
+    return await shell.openPath(outputFolderPath);
   })
   createWindow();
 });
@@ -75,7 +74,7 @@ app.on("activate", () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-async function initBackend() {
+function initBackend() {
   const backendDirectory = getBackendPath();
   const pythonExe = path.join(
     backendDirectory,
@@ -93,12 +92,12 @@ async function initBackend() {
   backendProcess.stdout.on("data", (data: string) => {
     console.log(`[Python] ${data}`);
   })
-  backendProcess.stderr.on("error", (error: string) => {
+  backendProcess.stderr.on("data", (error: string) => {
     console.error(`Python ERROR ${error}`);
   })
 }
 function deleteInput() {
-  const inputFolder = path.join(__dirname, "../../backend/input");
+  const inputFolder = path.join(getBackendPath(), 'input');
   rmSync(inputFolder, {
     force: true,
     recursive: true,
