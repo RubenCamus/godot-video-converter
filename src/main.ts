@@ -1,10 +1,10 @@
 import { app, BrowserWindow, shell, ipcMain } from "electron";
 import path from "node:path";
 import started from "electron-squirrel-startup";
-
+import * as cnf from './config';
+import * as plt from './platform';
 import { spawn } from "node:child_process";
 import { rmSync} from "node:fs";
-import { port } from "./config";
 let backendProcess: any;
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
@@ -45,7 +45,7 @@ app.whenReady().then(() => {
     })
   // Handles opening where output videos folder are stored
   ipcMain.handle("open-output-folder", async () => {
-    const outputFolderPath = path.join(getBackendPath(), 'output');
+    const outputFolderPath = path.join(plt.getBackendPath(), 'output');
     return await shell.openPath(outputFolderPath);
   })
   createWindow();
@@ -62,7 +62,9 @@ app.on("before-quit", () => {
   if (backendProcess) {
     backendProcess.kill();
   }
-  deleteInput(); // Delete input folder in backend
+  if (cnf.persistence == false) {
+    deleteInput(); // Delete input folder in backend
+  }
 });
 app.on("activate", () => {
   // On OS X it's common to re-create a window in the app when the
@@ -75,15 +77,9 @@ app.on("activate", () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
 function initBackend() {
-  const backendDirectory = getBackendPath();
-  const pythonExe = path.join(
-    backendDirectory,
-    ".venv",
-    "Scripts",
-    "python.exe",
-  );
+  const backendDirectory = plt.getBackendPath();
   backendProcess = spawn(
-    pythonExe,
+    plt.getPythonExecutable(),
     ["-m", "uvicorn", "main:app", "--port", "8000"],
     {
       cwd: backendDirectory,
@@ -97,15 +93,9 @@ function initBackend() {
   })
 }
 function deleteInput() {
-  const inputFolder = path.join(getBackendPath(), 'input');
+  const inputFolder = path.join(plt.getBackendPath(), 'input');
   rmSync(inputFolder, {
     force: true,
     recursive: true,
   })
-}
-function getBackendPath() {
-  if (app.isPackaged) {
-    return path.join(process.resourcesPath, "backend");
-  }
-  return path.join(__dirname, "../../backend");
 }
