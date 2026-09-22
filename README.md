@@ -128,7 +128,7 @@ The project currently requires Python and FFmpeg installed and in PATH to run th
 
 #### Download
 
-Download the latest release for your OS from [Releases](github.com/RubenCamus/godot-video-converter/releases)
+Download the latest release for your OS from [Releases](https://github.com/RubenCamus/godot-video-converter/releases)
    
 <!-- Run Locally -->
 ### Run from source
