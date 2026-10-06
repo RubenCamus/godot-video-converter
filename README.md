@@ -27,8 +27,6 @@
         <img src="https://img.shields.io/github/license/RubenCamus/godot-video-converter" alt="license" />
     </a>
 <h4>
-    <a href="https://github.com/RubenCamus/godot-video-converter/">View Demo</a>
-  <span> · </span>
     <a href="https://github.com/RubenCamus/godot-video-converter/issues/">Report Bug</a>
   <span> · </span>
     <a href="https://github.com/RubenCamus/godot-video-converter/issues/">Request Feature</a>
